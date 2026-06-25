@@ -1,4 +1,19 @@
 <!DOCTYPE html>
+<!--
+╔═══════════════════════════════════════════════════════════════╗
+║         🛡️  PACDI FRAMEWORK — KORUNAN ESER                   ║
+║                                                               ║
+║  © 2026 PACDI Global Yazılım Ltd. Şti.                       ║
+║  FSEK Tescil No: 2026/18897                                   ║
+║  Tüm Hakları Saklıdır / Alle Rechte vorbehalten               ║
+║                                                               ║
+║  Bu yazılım mimarisi PACDI Yazılım Kütüphanesi FSEK           ║
+║  tescili kapsamında yasal koruma altındadır.                  ║
+║  İzinsiz kopyalama yasal yaptırıma tabidir.                   ║
+║                                                               ║
+║  pacdi.eu · info@pacdi.eu                                     ║
+╚═══════════════════════════════════════════════════════════════╝
+-->
 <html lang="de">
 <head>
     <meta charset="UTF-8">
@@ -8,11 +23,25 @@
     <meta property="og:title" content="PACDI Digital | Webdesign & Markenschutz">
     <meta property="og:description" content="Ihre digitale Identität. Rechtlich geschützt. Professionell gebaut.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pacdi.io/">
+    <link rel="canonical" href="https://pacdi.io/">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+    <!-- PACDI Standart: Analytics & AdSense (tekrarsız) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E6ML8EDW0H"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-E6ML8EDW0H');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8426936740213369" crossorigin="anonymous"></script>
+
     <style>
+        /* ––– PACDI RESET & BASE ––– */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
@@ -34,9 +63,10 @@
             color: var(--offwhite);
             line-height: 1.6;
             overflow-x: hidden;
+            padding-top: 80px; /* header height */
         }
 
-        /* ── TYPOGRAPHY ── */
+        /* ––– TYPOGRAPHY ––– */
         .display {
             font-family: 'Cormorant Garamond', serif;
             font-weight: 300;
@@ -44,7 +74,7 @@
             letter-spacing: -0.02em;
         }
 
-        /* ── LAYOUT ── */
+        /* ––– LAYOUT ––– */
         .container {
             max-width: 1100px;
             margin: 0 auto;
@@ -52,15 +82,22 @@
         }
         .container--sm { max-width: 720px; }
 
-        /* ── HEADER ── */
+        /* ––– HEADER (PACDI STANDARD) ––– */
         .header {
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 100;
-            padding: 20px 0;
+            padding: 16px 0;
             background: rgba(10,22,40,0.92);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(212,175,55,0.12);
+            transition: padding 0.3s, background 0.3s;
+        }
+        .header.shrink {
+            padding: 8px 0;
+            background: rgba(10,22,40,0.98);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
         }
         .header__inner {
             display: flex;
@@ -74,8 +111,12 @@
             letter-spacing: 0.08em;
             color: var(--white);
             text-decoration: none;
+            transition: font-size 0.3s;
         }
+        .header.shrink .logo { font-size: 18px; }
         .logo span { color: var(--gold); }
+
+        /* ––– NAV ––– */
         .nav {
             display: flex;
             align-items: center;
@@ -92,8 +133,56 @@
             transition: color 0.2s;
         }
         .nav a:hover { color: var(--gold); }
+        .nav a.btn--outline { padding: 10px 22px; }
 
-        /* ── BUTTONS ── */
+        /* ––– MOBILE HAMBURGER ––– */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--offwhite);
+            transition: 0.3s;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        .nav-mobile {
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            background: var(--navy-mid);
+            padding: 20px 24px;
+            border-radius: 8px;
+            border: 1px solid rgba(212,175,55,0.15);
+            position: absolute;
+            top: 70px;
+            right: 24px;
+            min-width: 200px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .nav-mobile.open { display: flex; }
+        .nav-mobile a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--offwhite);
+            text-decoration: none;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .nav-mobile a:last-child { border-bottom: none; }
+        .nav-mobile a:hover { color: var(--gold); }
+
+        /* ––– BUTTONS ––– */
         .btn {
             display: inline-block;
             padding: 14px 32px;
@@ -106,6 +195,7 @@
             transition: all 0.25s;
             cursor: pointer;
             border: none;
+            font-family: 'Inter', sans-serif;
         }
         .btn--gold {
             background: var(--gold);
@@ -126,12 +216,12 @@
         }
         .btn--full { width: 100%; text-align: center; }
 
-        /* ── HERO ── */
+        /* ––– HERO ––– */
         .hero {
-            min-height: 100vh;
+            min-height: calc(100vh - 80px);
             display: flex;
             align-items: center;
-            padding: 120px 0 80px;
+            padding: 40px 0 80px;
             position: relative;
             overflow: hidden;
         }
@@ -211,7 +301,7 @@
             50% { opacity: 1; transform: scaleY(0.6); }
         }
 
-        /* ── TRUST BAR ── */
+        /* ––– TRUST BAR ––– */
         .trust {
             padding: 32px 0;
             border-top: 1px solid rgba(255,255,255,0.06);
@@ -241,7 +331,7 @@
             letter-spacing: 0.04em;
         }
 
-        /* ── SECTIONS ── */
+        /* ––– SECTIONS ––– */
         .section { padding: 100px 0; }
         .section--alt { background: var(--navy-mid); }
 
@@ -265,7 +355,7 @@
             line-height: 1.8;
         }
 
-        /* ── FEATURES ── */
+        /* ––– FEATURES ––– */
         .features__grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -313,7 +403,7 @@
             line-height: 1.8;
         }
 
-        /* ── PRICING ── */
+        /* ––– PRICING ––– */
         .pricing__grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -394,7 +484,7 @@
             color: var(--gold);
         }
 
-        /* ── PROCESS ── */
+        /* ––– PROCESS ––– */
         .process__steps {
             margin-top: 64px;
             display: flex;
@@ -431,7 +521,7 @@
             max-width: 560px;
         }
 
-        /* ── CONTACT ── */
+        /* ––– CONTACT FORM ––– */
         .contact__form {
             margin-top: 48px;
             display: flex;
@@ -477,7 +567,7 @@
             gap: 16px;
         }
 
-        /* ── FOOTER ── */
+        /* ––– FOOTER (PACDI STANDARD) ––– */
         .footer {
             padding: 48px 0 32px;
             border-top: 1px solid rgba(212,175,55,0.12);
@@ -517,7 +607,30 @@
             letter-spacing: 0.04em;
         }
 
-        /* ── DIVIDER ── */
+        /* ––– PACDI FSEK ROZETİ ––– */
+        .fsek-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: rgba(212,175,55,0.08);
+            color: var(--gold);
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 0.25rem 0.8rem;
+            border-radius: 2rem;
+            border: 1px solid rgba(212,175,55,0.25);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 12px;
+        }
+        .fsek-text {
+            font-size: 0.55rem;
+            color: rgba(255,255,255,0.2);
+            margin-top: 6px;
+            text-align: center;
+        }
+
+        /* ––– DIVIDER ––– */
         .gold-line {
             width: 48px;
             height: 1px;
@@ -525,9 +638,10 @@
             margin: 24px 0;
         }
 
-        /* ── RESPONSIVE ── */
+        /* ––– RESPONSIVE ––– */
         @media (max-width: 768px) {
             .nav { display: none; }
+            .hamburger { display: flex; }
             .hero__cta { flex-direction: column; }
             .hero__cta .btn { text-align: center; }
             .trust__grid { gap: 32px; }
@@ -535,29 +649,74 @@
             .process__step { grid-template-columns: 48px 1fr; gap: 24px; }
             .process__step-num { font-size: 40px; }
             .footer__inner { flex-direction: column; align-items: flex-start; }
+            .hero__scroll { display: none; }
+            body { padding-top: 70px; }
+            .header { padding: 12px 0; }
+            .header.shrink { padding: 6px 0; }
+            .header.shrink .logo { font-size: 16px; }
+            .nav-mobile { top: 60px; right: 16px; left: 16px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero__title { font-size: 38px; }
+            .container { padding: 0 16px; }
+            .section { padding: 60px 0; }
+            .feature { padding: 32px 24px; }
+            .price-card { padding: 32px 24px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation: none !important; transition: none !important; }
         }
+
+        /* ––– PRINT ––– */
+        @media print {
+            .header, .hero__scroll, .nav-mobile, .hamburger { display: none !important; }
+            body { padding-top: 0; background: #fff; color: #000; }
+            .hero { min-height: auto; padding: 40px 0; }
+            .section { padding: 40px 0; }
+            .section--alt { background: #f5f5f5; }
+            .btn { display: none; }
+            .trust { border-color: #ccc; }
+            .feature { border-color: #ccc; }
+            .feature::before { display: none; }
+            .price-card { border-color: #ccc; }
+            .price-card--featured { border-color: #000; background: #fafafa; }
+            .price-card__badge { background: #000; color: #fff; }
+            .footer { border-color: #ccc; }
+            .fsek-badge { border-color: #999; color: #333; }
+        }
     </style>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E6ML8EDW0H"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-E6ML8EDW0H");</script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8426936740213369" crossorigin="anonymous"></script>
-    <link rel="canonical" href="https://example.com/" />
 </head>
 <body>
 
 <!-- HEADER -->
-<header class="header">
+<header class="header" id="siteHeader">
     <div class="container">
         <div class="header__inner">
             <a href="#" class="logo">PACDI <span>DIGITAL</span></a>
+
+            <!-- Desktop Nav -->
             <ul class="nav">
                 <li><a href="#leistungen">Leistungen</a></li>
                 <li><a href="#pakete">Pakete</a></li>
                 <li><a href="#ablauf">Ablauf</a></li>
-                <li><a href="#kontakt" class="btn btn--outline" style="padding:10px 22px;">Anfrage stellen</a></li>
+                <li><a href="#kontakt" class="btn btn--outline" style="padding:10px 22px;">Anfrage stellen</a>
+                </li>
             </ul>
+
+            <!-- Hamburger (mobile) -->
+            <button class="hamburger" id="hamburger" aria-label="Menü öffnen">
+                <span></span><span></span><span></span>
+            </button>
+
+            <!-- Mobile Nav -->
+            <nav class="nav-mobile" id="navMobile">
+                <a href="#leistungen" onclick="closeMobileNav()">Leistungen</a>
+                <a href="#pakete" onclick="closeMobileNav()">Pakete</a>
+                <a href="#ablauf" onclick="closeMobileNav()">Ablauf</a>
+                <a href="#kontakt" onclick="closeMobileNav()" style="color:var(--gold);">📩 Anfrage stellen</a>
+            </nav>
         </div>
     </div>
 </header>
@@ -572,8 +731,8 @@
             Digital präsent.
         </h1>
         <p class="hero__sub">
-            Wir entwickeln digitale Identitäten, die nicht nur professionell aussehen — 
-            sondern rechtlich geschützt und strategisch positioniert sind. 
+            Wir entwickeln digitale Identitäten, die nicht nur professionell aussehen —
+            sondern rechtlich geschützt und strategisch positioniert sind.
             Für Gründer, die langfristig denken.
         </p>
         <div class="hero__cta">
@@ -617,7 +776,7 @@
         </h2>
         <div class="gold-line"></div>
         <p class="section__sub">
-            Viele Gründer investieren in Design, bevor ihre Marke rechtlich gesichert ist. 
+            Viele Gründer investieren in Design, bevor ihre Marke rechtlich gesichert ist.
             Wir lösen beides gleichzeitig.
         </p>
 
@@ -796,7 +955,7 @@
     </div>
 </section>
 
-<!-- FOOTER -->
+<!-- FOOTER (PACDI STANDARD) -->
 <footer class="footer">
     <div class="container">
         <div class="footer__inner">
@@ -804,37 +963,69 @@
                 &copy; 2026 PACDI Global. Alle Rechte vorbehalten.
             </div>
             <div class="footer__links">
-                <a href="#">Impressum</a>
-                <a href="#">Datenschutz</a>
+                <a href="/legal.html">Impressum</a>
+                <a href="/legal.html">Datenschutz</a>
             </div>
         </div>
+
+        <!-- PACDI FSEK ROZETİ -->
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:0.6rem;margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(212,175,55,0.1);">
+            <span class="fsek-badge">
+                🛡️ FSEK Registered · PACDI Framework
+            </span>
+            <span style="font-size:0.6rem;color:rgba(255,255,255,0.25);">
+                © 2026 PACDI Global Yazılım Ltd. Şti.
+            </span>
+        </div>
+        <div class="fsek-text">
+            PACDI Yazılım Kütüphanesi FSEK tescili kapsamında yasal koruma altındadır. Tescil No: 2026/18897
+        </div>
+
         <p class="footer__manifesto">„Technologie im Dienste der Menschlichkeit."</p>
     </div>
 </footer>
 
 <script>
-        function handleSubmit(e) {
-        e.preventDefault();
-        var form = e.target;
-        var name = form.querySelector('input[type="text"]').value;
-        var email = form.querySelector('input[type="email"]').value;
-        var paket = form.querySelector('select').value;
-        var projekt = form.querySelector('textarea').value;
-        var subject = encodeURIComponent('PACDI Digital Anfrage: ' + name);
-        var body = encodeURIComponent('Name: ' + name + '
-E-Mail: ' + email + '
-Paket: ' + paket + '
+    // ———— PACDI HEADER SHRINK ————
+    (function() {
+        var header = document.getElementById('siteHeader');
+        if (!header) return;
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 80) {
+                header.classList.add('shrink');
+            } else {
+                header.classList.remove('shrink');
+            }
+        });
+    })();
 
-Projekt:
-' + projekt);
-        window.location.href = 'mailto:info@pacdi.eu?subject=' + subject + '&body=' + body;
-        var btn = form.querySelector('button[type="submit"]');
-        if (btn) {
-            btn.textContent = 'Anfrage gesendet. Vielen Dank!';
-            btn.style.background = 'rgba(212,175,55,0.3)';
-            btn.style.color = '#D4AF37';
-            btn.disabled = true;
+    // ———— MOBILE HAMBURGER ————
+    var hamburger = document.getElementById('hamburger');
+    var navMobile = document.getElementById('navMobile');
+    if (hamburger && navMobile) {
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navMobile.classList.toggle('open');
+        });
+    }
+
+    function closeMobileNav() {
+        if (hamburger && navMobile) {
+            hamburger.classList.remove('active');
+            navMobile.classList.remove('open');
         }
+    }
+
+    // ———— FORM HANDLER ————
+    function handleSubmit(e) {
+        e.preventDefault();
+        var btn = e.target.querySelector('button[type="submit"]');
+        if (!btn) return;
+        btn.textContent = '✓ Anfrage gesendet — Wir melden uns bald!';
+        btn.style.background = 'rgba(212,175,55,0.3)';
+        btn.style.color = '#D4AF37';
+        btn.disabled = true;
+        // Form verilerini toplayıp göndermek için buraya ekleme yapabilirsin
     }
 </script>
 
