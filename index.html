@@ -18,7 +18,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PACDI Digital | Webdesign & Markenschutz für Gründer in Europa</title>
+    <title>PACDI Digital | Webdesign & Markenschutz für Gründer</title>
     <meta name="description" content="Professionelles Webdesign kombiniert mit strategischem Markenschutz. Rechtlich gesicherte digitale Identitäten für Gründer in Deutschland und Europa.">
     <meta property="og:title" content="PACDI Digital | Webdesign & Markenschutz">
     <meta property="og:description" content="Ihre digitale Identität. Rechtlich geschützt. Professionell gebaut.">
@@ -30,7 +30,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!-- PACDI Standart: Analytics & AdSense (tekrarsız) -->
+    <!-- PACDI Standart: Analytics & AdSense -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-E6ML8EDW0H"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -63,7 +63,8 @@
             color: var(--offwhite);
             line-height: 1.6;
             overflow-x: hidden;
-            padding-top: 80px; /* header height */
+            padding-top: 80px;
+            transition: background 0.3s, color 0.3s;
         }
 
         /* ––– TYPOGRAPHY ––– */
@@ -103,6 +104,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 12px;
         }
         .logo {
             font-family: 'Cormorant Garamond', serif;
@@ -112,6 +114,7 @@
             color: var(--white);
             text-decoration: none;
             transition: font-size 0.3s;
+            flex-shrink: 0;
         }
         .header.shrink .logo { font-size: 18px; }
         .logo span { color: var(--gold); }
@@ -134,6 +137,37 @@
         }
         .nav a:hover { color: var(--gold); }
         .nav a.btn--outline { padding: 10px 22px; }
+
+        /* ––– DİL BUTONLARI ––– */
+        .lang-toggle {
+            display: flex;
+            background: rgba(255,255,255,0.06);
+            border-radius: 2rem;
+            padding: 2px;
+            gap: 2px;
+            flex-shrink: 0;
+        }
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.6rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .lang-btn.active {
+            background: var(--gold);
+            color: var(--navy);
+        }
+        .lang-btn:hover:not(.active) {
+            color: var(--white);
+        }
 
         /* ––– MOBILE HAMBURGER ––– */
         .hamburger {
@@ -167,8 +201,9 @@
             position: absolute;
             top: 70px;
             right: 24px;
-            min-width: 200px;
+            left: 24px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            z-index: 200;
         }
         .nav-mobile.open { display: flex; }
         .nav-mobile a {
@@ -521,50 +556,29 @@
             max-width: 560px;
         }
 
-        /* ––– CONTACT FORM ––– */
-        .contact__form {
+        /* ––– CONTACT ––– */
+        .contact__box {
             margin-top: 48px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-        .form__group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .form__label {
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--gray);
-        }
-        .form__input,
-        .form__textarea,
-        .form__select {
-            background: rgba(255,255,255,0.04);
+            padding: 48px;
             border: 1px solid rgba(212,175,55,0.15);
-            color: var(--offwhite);
-            padding: 14px 18px;
-            font-size: 14px;
-            font-family: 'Inter', sans-serif;
-            border-radius: 2px;
-            transition: border-color 0.2s;
-            outline: none;
-            width: 100%;
+            text-align: center;
+            background: rgba(212,175,55,0.03);
         }
-        .form__input:focus,
-        .form__textarea:focus,
-        .form__select:focus { border-color: var(--gold); }
-        .form__input::placeholder,
-        .form__textarea::placeholder { color: rgba(138,143,154,0.5); }
-        .form__select option { background: var(--navy-mid); }
-        .form__textarea { resize: vertical; min-height: 120px; }
-        .form__row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
+        .contact__box .contact__email {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            color: var(--gold);
+            text-decoration: none;
+            display: inline-block;
+            margin: 16px 0 8px;
+            transition: color 0.2s;
+        }
+        .contact__box .contact__email:hover {
+            color: var(--gold-lt);
+        }
+        .contact__box .contact__note {
+            font-size: 13px;
+            color: var(--gray);
         }
 
         /* ––– FOOTER (PACDI STANDARD) ––– */
@@ -645,7 +659,6 @@
             .hero__cta { flex-direction: column; }
             .hero__cta .btn { text-align: center; }
             .trust__grid { gap: 32px; }
-            .form__row { grid-template-columns: 1fr; }
             .process__step { grid-template-columns: 48px 1fr; gap: 24px; }
             .process__step-num { font-size: 40px; }
             .footer__inner { flex-direction: column; align-items: flex-start; }
@@ -655,6 +668,8 @@
             .header.shrink { padding: 6px 0; }
             .header.shrink .logo { font-size: 16px; }
             .nav-mobile { top: 60px; right: 16px; left: 16px; }
+            .contact__box { padding: 32px 24px; }
+            .contact__box .contact__email { font-size: 24px; }
         }
 
         @media (max-width: 480px) {
@@ -663,13 +678,15 @@
             .section { padding: 60px 0; }
             .feature { padding: 32px 24px; }
             .price-card { padding: 32px 24px; }
+            .contact__box { padding: 24px 16px; }
+            .contact__box .contact__email { font-size: 20px; }
+            .lang-btn { font-size: 0.5rem; padding: 3px 8px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation: none !important; transition: none !important; }
         }
 
-        /* ––– PRINT ––– */
         @media print {
             .header, .hero__scroll, .nav-mobile, .hamburger { display: none !important; }
             body { padding-top: 0; background: #fff; color: #000; }
@@ -685,6 +702,7 @@
             .price-card__badge { background: #000; color: #fff; }
             .footer { border-color: #ccc; }
             .fsek-badge { border-color: #999; color: #333; }
+            .contact__box { border-color: #ccc; }
         }
     </style>
 </head>
@@ -698,24 +716,30 @@
 
             <!-- Desktop Nav -->
             <ul class="nav">
-                <li><a href="#leistungen">Leistungen</a></li>
-                <li><a href="#pakete">Pakete</a></li>
-                <li><a href="#ablauf">Ablauf</a></li>
-                <li><a href="#kontakt" class="btn btn--outline" style="padding:10px 22px;">Anfrage stellen</a>
-                </li>
+                <li><a href="#leistungen" data-i18n="nav-leistungen">Leistungen</a></li>
+                <li><a href="#pakete" data-i18n="nav-pakete">Pakete</a></li>
+                <li><a href="#ablauf" data-i18n="nav-ablauf">Ablauf</a></li>
+                <li><a href="#kontakt" class="btn btn--outline" style="padding:10px 22px;" data-i18n="nav-kontakt">Anfrage stellen</a></li>
             </ul>
 
-            <!-- Hamburger (mobile) -->
+            <!-- Dil Butonları -->
+            <div class="lang-toggle" role="group">
+                <button class="lang-btn active" data-lang="de" aria-label="Deutsch">DE</button>
+                <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+                <button class="lang-btn" data-lang="tr" aria-label="Türkçe">TR</button>
+            </div>
+
+            <!-- Hamburger -->
             <button class="hamburger" id="hamburger" aria-label="Menü öffnen">
                 <span></span><span></span><span></span>
             </button>
 
             <!-- Mobile Nav -->
             <nav class="nav-mobile" id="navMobile">
-                <a href="#leistungen" onclick="closeMobileNav()">Leistungen</a>
-                <a href="#pakete" onclick="closeMobileNav()">Pakete</a>
-                <a href="#ablauf" onclick="closeMobileNav()">Ablauf</a>
-                <a href="#kontakt" onclick="closeMobileNav()" style="color:var(--gold);">📩 Anfrage stellen</a>
+                <a href="#leistungen" onclick="closeMobileNav()" data-i18n="nav-leistungen">Leistungen</a>
+                <a href="#pakete" onclick="closeMobileNav()" data-i18n="nav-pakete">Pakete</a>
+                <a href="#ablauf" onclick="closeMobileNav()" data-i18n="nav-ablauf">Ablauf</a>
+                <a href="#kontakt" onclick="closeMobileNav()" style="color:var(--gold);" data-i18n="nav-kontakt">📩 Anfrage stellen</a>
             </nav>
         </div>
     </div>
@@ -724,23 +748,23 @@
 <!-- HERO -->
 <section class="hero">
     <div class="container">
-        <div class="hero__eyebrow">Webdesign &amp; Markenschutz · Europa</div>
+        <div class="hero__eyebrow" data-i18n="hero-eyebrow">Webdesign &amp; Markenschutz · Europa</div>
         <h1 class="hero__title display">
-            Ihre Idee.<br>
-            <em>Rechtlich gesichert.</em><br>
-            Digital präsent.
+            <span data-i18n="hero-title1">Ihre Idee.</span><br>
+            <em data-i18n="hero-title2">Rechtlich gesichert.</em><br>
+            <span data-i18n="hero-title3">Digital präsent.</span>
         </h1>
-        <p class="hero__sub">
+        <p class="hero__sub" data-i18n="hero-sub">
             Wir entwickeln digitale Identitäten, die nicht nur professionell aussehen —
             sondern rechtlich geschützt und strategisch positioniert sind.
             Für Gründer, die langfristig denken.
         </p>
         <div class="hero__cta">
-            <a href="#kontakt" class="btn btn--gold">Kostenlose Erstberatung</a>
-            <a href="#pakete" class="btn btn--outline">Pakete ansehen</a>
+            <a href="#kontakt" class="btn btn--gold" data-i18n="hero-cta1">Kostenlose Erstberatung</a>
+            <a href="#pakete" class="btn btn--outline" data-i18n="hero-cta2">Pakete ansehen</a>
         </div>
     </div>
-    <div class="hero__scroll">Entdecken</div>
+    <div class="hero__scroll" data-i18n="hero-scroll">Entdecken</div>
 </section>
 
 <!-- TRUST BAR -->
@@ -748,20 +772,20 @@
     <div class="container">
         <div class="trust__grid">
             <div class="trust__item">
-                <strong>EUIPO Ready</strong>
-                <span>Europaweiter Markenschutz</span>
+                <strong data-i18n="trust-1-title">EUIPO Ready</strong>
+                <span data-i18n="trust-1-text">Europaweiter Markenschutz</span>
             </div>
             <div class="trust__item">
-                <strong>DSGVO Konform</strong>
-                <span>Rechtssichere Umsetzung</span>
+                <strong data-i18n="trust-2-title">DSGVO Konform</strong>
+                <span data-i18n="trust-2-text">Rechtssichere Umsetzung</span>
             </div>
             <div class="trust__item">
-                <strong>Hosting-frei</strong>
-                <span>Keine laufenden Serverkosten</span>
+                <strong data-i18n="trust-3-title">Hosting-frei</strong>
+                <span data-i18n="trust-3-text">Keine laufenden Serverkosten</span>
             </div>
             <div class="trust__item">
-                <strong>Mehrsprachig</strong>
-                <span>DE · EN · TR</span>
+                <strong data-i18n="trust-4-title">Mehrsprachig</strong>
+                <span data-i18n="trust-4-text">DE · EN · TR</span>
             </div>
         </div>
     </div>
@@ -770,12 +794,13 @@
 <!-- LEISTUNGEN -->
 <section id="leistungen" class="section">
     <div class="container">
-        <div class="section__label">Leistungen</div>
+        <div class="section__label" data-i18n="leistungen-label">Leistungen</div>
         <h2 class="section__title display">
-            Mehr als eine Website.<br>Ein vollständiges Schutzschild.
+            <span data-i18n="leistungen-title1">Mehr als eine Website.</span><br>
+            <span data-i18n="leistungen-title2">Ein vollständiges Schutzschild.</span>
         </h2>
         <div class="gold-line"></div>
-        <p class="section__sub">
+        <p class="section__sub" data-i18n="leistungen-sub">
             Viele Gründer investieren in Design, bevor ihre Marke rechtlich gesichert ist.
             Wir lösen beides gleichzeitig.
         </p>
@@ -783,33 +808,33 @@
         <div class="features__grid">
             <div class="feature">
                 <div class="feature__num">01</div>
-                <div class="feature__title">Markenrecherche &amp; Schutz</div>
-                <p class="feature__text">Vor jedem Projekt prüfen wir Ihre Markenidentität im EUIPO- und ePATS-Register. Abmahnungen kosten mehr als Vorbeugung — wir schützen Sie bevor es teuer wird.</p>
+                <div class="feature__title" data-i18n="feature1-title">Markenrecherche &amp; Schutz</div>
+                <p class="feature__text" data-i18n="feature1-text">Vor jedem Projekt prüfen wir Ihre Markenidentität im EUIPO- und ePATS-Register. Abmahnungen kosten mehr als Vorbeugung — wir schützen Sie bevor es teuer wird.</p>
             </div>
             <div class="feature">
                 <div class="feature__num">02</div>
-                <div class="feature__title">Premium Webentwicklung</div>
-                <p class="feature__text">Maßgeschneiderte, schnell ladende Webseiten ohne aufgeblähte CMS-Systeme. Ihr Code gehört Ihnen — vollständig, dokumentiert und wartungsfrei deploybar.</p>
+                <div class="feature__title" data-i18n="feature2-title">Premium Webentwicklung</div>
+                <p class="feature__text" data-i18n="feature2-text">Maßgeschneiderte, schnell ladende Webseiten ohne aufgeblähte CMS-Systeme. Ihr Code gehört Ihnen — vollständig, dokumentiert und wartungsfrei deploybar.</p>
             </div>
             <div class="feature">
                 <div class="feature__num">03</div>
-                <div class="feature__title">Domain-Architektur</div>
-                <p class="feature__text">Strategische Planung Ihrer digitalen Adresse. Welche Endungen sichern Ihre Marke? Wie leiten Sie Traffic optimal? Wir bauen das Fundament richtig.</p>
+                <div class="feature__title" data-i18n="feature3-title">Domain-Architektur</div>
+                <p class="feature__text" data-i18n="feature3-text">Strategische Planung Ihrer digitalen Adresse. Welche Endungen sichern Ihre Marke? Wie leiten Sie Traffic optimal? Wir bauen das Fundament richtig.</p>
             </div>
             <div class="feature">
                 <div class="feature__num">04</div>
-                <div class="feature__title">Mehrsprachige Präsenz</div>
-                <p class="feature__text">Automatische Spracherkennung — Ihre Besucher sehen die Seite in ihrer Sprache, ohne separate Domains oder komplexe Systeme. Ein Auftritt, alle Märkte.</p>
+                <div class="feature__title" data-i18n="feature4-title">Mehrsprachige Präsenz</div>
+                <p class="feature__text" data-i18n="feature4-text">Automatische Spracherkennung — Ihre Besucher sehen die Seite in ihrer Sprache, ohne separate Domains oder komplexe Systeme. Ein Auftritt, alle Märkte.</p>
             </div>
             <div class="feature">
                 <div class="feature__num">05</div>
-                <div class="feature__title">IP-Dokumentation</div>
-                <p class="feature__text">Vollständige Urheberschutz-Dokumentation Ihres digitalen Werks. Ihr geistiges Eigentum ist genauso schützenswert wie Ihr Markenname.</p>
+                <div class="feature__title" data-i18n="feature5-title">IP-Dokumentation</div>
+                <p class="feature__text" data-i18n="feature5-text">Vollständige Urheberschutz-Dokumentation Ihres digitalen Werks. Ihr geistiges Eigentum ist genauso schützenswert wie Ihr Markenname.</p>
             </div>
             <div class="feature">
                 <div class="feature__num">06</div>
-                <div class="feature__title">Laufender Support</div>
-                <p class="feature__text">Kein Projekt endet mit der Lieferung. Technischer Support, Updates und strategische Begleitung — damit Ihre digitale Präsenz langfristig stark bleibt.</p>
+                <div class="feature__title" data-i18n="feature6-title">Laufender Support</div>
+                <p class="feature__text" data-i18n="feature6-text">Kein Projekt endet mit der Lieferung. Technischer Support, Updates und strategische Begleitung — damit Ihre digitale Präsenz langfristig stark bleibt.</p>
             </div>
         </div>
     </div>
@@ -818,61 +843,59 @@
 <!-- PAKETE -->
 <section id="pakete" class="section section--alt">
     <div class="container">
-        <div class="section__label">Pakete</div>
-        <h2 class="section__title display">Transparent. Klar. Kalkulierbar.</h2>
+        <div class="section__label" data-i18n="pakete-label">Pakete</div>
+        <h2 class="section__title display"><span data-i18n="pakete-title">Transparent. Klar. Kalkulierbar.</span></h2>
         <div class="gold-line"></div>
-        <p class="section__sub">Drei Pakete für drei Wachstumsphasen. Kein Kleingedrucktes.</p>
+        <p class="section__sub" data-i18n="pakete-sub">Drei Pakete für drei Wachstumsphasen. Kein Kleingedrucktes.</p>
 
         <div class="pricing__grid">
-
             <!-- Starter -->
             <div class="price-card">
-                <div class="price-card__name">Digital Start</div>
-                <p class="price-card__tagline">Für Solopreneure und erste digitale Präsenz.</p>
+                <div class="price-card__name" data-i18n="starter-name">Digital Start</div>
+                <p class="price-card__tagline" data-i18n="starter-tagline">Für Solopreneure und erste digitale Präsenz.</p>
                 <div class="price-card__price">1.490 <span>€</span></div>
                 <ul class="price-card__features">
-                    <li>Premium Landing Page</li>
-                    <li>Nationale Markenrecherche (DE / TR)</li>
-                    <li>Domain-Setup &amp; DNS-Konfiguration</li>
-                    <li>DSGVO-konforme Einrichtung</li>
-                    <li>Hosting-freie Infrastruktur</li>
+                    <li data-i18n="starter-f1">Premium Landing Page</li>
+                    <li data-i18n="starter-f2">Nationale Markenrecherche (DE / TR)</li>
+                    <li data-i18n="starter-f3">Domain-Setup &amp; DNS-Konfiguration</li>
+                    <li data-i18n="starter-f4">DSGVO-konforme Einrichtung</li>
+                    <li data-i18n="starter-f5">Hosting-freie Infrastruktur</li>
                 </ul>
-                <a href="#kontakt" class="btn btn--outline btn--full">Anfrage stellen</a>
+                <a href="#kontakt" class="btn btn--outline btn--full" data-i18n="starter-btn">Anfrage stellen</a>
             </div>
 
-            <!-- Pro - Empfohlen -->
+            <!-- Pro -->
             <div class="price-card price-card--featured">
-                <div class="price-card__badge">Empfohlen</div>
-                <div class="price-card__name">Brand Atelier</div>
-                <p class="price-card__tagline">Das vollständige Paket für wachsende Marken.</p>
+                <div class="price-card__badge" data-i18n="pro-badge">Empfohlen</div>
+                <div class="price-card__name" data-i18n="pro-name">Brand Atelier</div>
+                <p class="price-card__tagline" data-i18n="pro-tagline">Das vollständige Paket für wachsende Marken.</p>
                 <div class="price-card__price">3.490 <span>€</span></div>
                 <ul class="price-card__features">
-                    <li>Webdesign bis 5 Seiten</li>
-                    <li><strong style="color:var(--gold)">EUIPO Markenanmeldung (vollständig)</strong></li>
-                    <li>Mehrsprachige Struktur (DE / EN)</li>
-                    <li>SEO-Grundoptimierung</li>
-                    <li>IP-Dokumentation &amp; Quellcode-Übergabe</li>
-                    <li>12 Monate technischer Support</li>
+                    <li data-i18n="pro-f1">Webdesign bis 5 Seiten</li>
+                    <li><strong style="color:var(--gold)" data-i18n="pro-f2">EUIPO Markenanmeldung (vollständig)</strong></li>
+                    <li data-i18n="pro-f3">Mehrsprachige Struktur (DE / EN)</li>
+                    <li data-i18n="pro-f4">SEO-Grundoptimierung</li>
+                    <li data-i18n="pro-f5">IP-Dokumentation &amp; Quellcode-Übergabe</li>
+                    <li data-i18n="pro-f6">12 Monate technischer Support</li>
                 </ul>
-                <a href="#kontakt" class="btn btn--gold btn--full">Auswählen</a>
+                <a href="#kontakt" class="btn btn--gold btn--full" data-i18n="pro-btn">Auswählen</a>
             </div>
 
             <!-- Enterprise -->
             <div class="price-card">
-                <div class="price-card__name">Enterprise Global</div>
-                <p class="price-card__tagline">Für etablierte Unternehmen mit globaler Vision.</p>
+                <div class="price-card__name" data-i18n="enterprise-name">Enterprise Global</div>
+                <p class="price-card__tagline" data-i18n="enterprise-tagline">Für etablierte Unternehmen mit globaler Vision.</p>
                 <div class="price-card__price">7.490 <span>€</span></div>
                 <ul class="price-card__features">
-                    <li>E-Commerce &amp; Bestellsystem</li>
-                    <li>Dreisprach-Architektur (DE / EN / TR)</li>
-                    <li>Globaler IP- &amp; Markenschutz-Komplettservice</li>
-                    <li>KI-gestützte Funktionen</li>
-                    <li>Ciro-Partnerschaft auf Anfrage</li>
-                    <li>Priorisierter Support &amp; Strategie-Coaching</li>
+                    <li data-i18n="enterprise-f1">E-Commerce &amp; Bestellsystem</li>
+                    <li data-i18n="enterprise-f2">Dreisprach-Architektur (DE / EN / TR)</li>
+                    <li data-i18n="enterprise-f3">Globaler IP- &amp; Markenschutz-Komplettservice</li>
+                    <li data-i18n="enterprise-f4">KI-gestützte Funktionen</li>
+                    <li data-i18n="enterprise-f5">Ciro-Partnerschaft auf Anfrage</li>
+                    <li data-i18n="enterprise-f6">Priorisierter Support &amp; Strategie-Coaching</li>
                 </ul>
-                <a href="#kontakt" class="btn btn--outline btn--full">Kontakt aufnehmen</a>
+                <a href="#kontakt" class="btn btn--outline btn--full" data-i18n="enterprise-btn">Kontakt aufnehmen</a>
             </div>
-
         </div>
     </div>
 </section>
@@ -880,37 +903,40 @@
 <!-- ABLAUF -->
 <section id="ablauf" class="section">
     <div class="container container--sm">
-        <div class="section__label">Ablauf</div>
-        <h2 class="section__title display">Von der Idee zur<br>gesicherten Marke.</h2>
+        <div class="section__label" data-i18n="ablauf-label">Ablauf</div>
+        <h2 class="section__title display">
+            <span data-i18n="ablauf-title1">Von der Idee zur</span><br>
+            <span data-i18n="ablauf-title2">gesicherten Marke.</span>
+        </h2>
         <div class="gold-line"></div>
 
         <div class="process__steps">
             <div class="process__step">
                 <div class="process__step-num display">01</div>
                 <div class="process__step-content">
-                    <h3>Erstgespräch &amp; Analyse</h3>
-                    <p>Wir verstehen Ihr Projekt, Ihre Zielgruppe und Ihre Märkte. Keine Standardlösungen — jedes Projekt beginnt mit echtem Zuhören.</p>
+                    <h3 data-i18n="step1-title">Erstgespräch &amp; Analyse</h3>
+                    <p data-i18n="step1-text">Wir verstehen Ihr Projekt, Ihre Zielgruppe und Ihre Märkte. Keine Standardlösungen — jedes Projekt beginnt mit echtem Zuhören.</p>
                 </div>
             </div>
             <div class="process__step">
                 <div class="process__step-num display">02</div>
                 <div class="process__step-content">
-                    <h3>Markenrecherche</h3>
-                    <p>Bevor ein einziger Code geschrieben wird, prüfen wir Ihre Markenidentität auf Konflikte im EUIPO- und nationalen Register.</p>
+                    <h3 data-i18n="step2-title">Markenrecherche</h3>
+                    <p data-i18n="step2-text">Bevor ein einziger Code geschrieben wird, prüfen wir Ihre Markenidentität auf Konflikte im EUIPO- und nationalen Register.</p>
                 </div>
             </div>
             <div class="process__step">
                 <div class="process__step-num display">03</div>
                 <div class="process__step-content">
-                    <h3>Design &amp; Entwicklung</h3>
-                    <p>Maßgeschneidertes Design, entwickelt in Ihren Markenwerten. Schnell, wartungsarm, ohne überflüssige Abhängigkeiten.</p>
+                    <h3 data-i18n="step3-title">Design &amp; Entwicklung</h3>
+                    <p data-i18n="step3-text">Maßgeschneidertes Design, entwickelt in Ihren Markenwerten. Schnell, wartungsarm, ohne überflüssige Abhängigkeiten.</p>
                 </div>
             </div>
             <div class="process__step">
                 <div class="process__step-num display">04</div>
                 <div class="process__step-content">
-                    <h3>Übergabe &amp; Schutz</h3>
-                    <p>Vollständige Quellcode-Übergabe, IP-Dokumentation und — je nach Paket — Einreichung Ihrer Markenanmeldung beim EUIPO.</p>
+                    <h3 data-i18n="step4-title">Übergabe &amp; Schutz</h3>
+                    <p data-i18n="step4-text">Vollständige Quellcode-Übergabe, IP-Dokumentation und — je nach Paket — Einreichung Ihrer Markenanmeldung beim EUIPO.</p>
                 </div>
             </div>
         </div>
@@ -920,51 +946,30 @@
 <!-- KONTAKT -->
 <section id="kontakt" class="section section--alt">
     <div class="container container--sm">
-        <div class="section__label">Kontakt</div>
-        <h2 class="section__title display">Bereit für den<br>nächsten Schritt?</h2>
+        <div class="section__label" data-i18n="kontakt-label">Kontakt</div>
+        <h2 class="section__title display">
+            <span data-i18n="kontakt-title1">Bereit für den</span><br>
+            <span data-i18n="kontakt-title2">nächsten Schritt?</span>
+        </h2>
         <div class="gold-line"></div>
-        <p class="section__sub">Kostenloses Erstgespräch, unverbindlich. Wir melden uns innerhalb von 24 Stunden.</p>
+        <p class="section__sub" data-i18n="kontakt-sub">Kostenloses Erstgespräch, unverbindlich. Schreiben Sie uns einfach eine E-Mail.</p>
 
-        <form class="contact__form" onsubmit="handleSubmit(event)">
-            <div class="form__row">
-                <div class="form__group">
-                    <label class="form__label">Name / Unternehmen</label>
-                    <input type="text" class="form__input" placeholder="Ihr Name oder Firmenname" required>
-                </div>
-                <div class="form__group">
-                    <label class="form__label">E-Mail</label>
-                    <input type="email" class="form__input" placeholder="ihre@email.de" required>
-                </div>
-            </div>
-            <div class="form__group">
-                <label class="form__label">Gewünschtes Paket</label>
-                <select class="form__select">
-                    <option value="">Bitte wählen...</option>
-                    <option>Digital Start — 1.490 €</option>
-                    <option>Brand Atelier — 3.490 €</option>
-                    <option>Enterprise Global — 7.490 €</option>
-                    <option>Ich bin unsicher, bitte beraten Sie mich</option>
-                </select>
-            </div>
-            <div class="form__group">
-                <label class="form__label">Ihr Projekt</label>
-                <textarea class="form__textarea" placeholder="Kurze Beschreibung Ihres Projekts, Ihrer Markenidee oder Ihrer Frage..." required></textarea>
-            </div>
-            <button type="submit" class="btn btn--gold btn--full">Unverbindliche Anfrage senden →</button>
-        </form>
+        <div class="contact__box">
+            <p style="font-size:13px; color:var(--gray); margin-bottom:8px;" data-i18n="kontakt-email-label">📧 Direkter Draht zu uns:</p>
+            <a href="mailto:info@pacdi.io" class="contact__email">info@pacdi.io</a>
+            <p class="contact__note" data-i18n="kontakt-email-note">Wir melden uns innerhalb von 24 Stunden.</p>
+        </div>
     </div>
 </section>
 
-<!-- FOOTER (PACDI STANDARD) -->
+<!-- FOOTER -->
 <footer class="footer">
     <div class="container">
         <div class="footer__inner">
-            <div class="footer__copy">
-                &copy; 2026 PACDI Global. Alle Rechte vorbehalten.
-            </div>
+            <div class="footer__copy" data-i18n="footer-copy">&copy; 2026 PACDI Global. Alle Rechte vorbehalten.</div>
             <div class="footer__links">
-                <a href="/legal.html">Impressum</a>
-                <a href="/legal.html">Datenschutz</a>
+                <a href="/legal.html" data-i18n="footer-impressum">Impressum</a>
+                <a href="/legal.html" data-i18n="footer-datenschutz">Datenschutz</a>
             </div>
         </div>
 
@@ -981,12 +986,324 @@
             PACDI Yazılım Kütüphanesi FSEK tescili kapsamında yasal koruma altındadır. Tescil No: 2026/18897
         </div>
 
-        <p class="footer__manifesto">„Technologie im Dienste der Menschlichkeit."</p>
+        <p class="footer__manifesto" data-i18n="footer-manifesto">„Technologie im Dienste der Menschlichkeit."</p>
     </div>
 </footer>
 
 <script>
-    // ———— PACDI HEADER SHRINK ————
+    // ———— i18n DATA ————
+    var i18n = {
+        de: {
+            "nav-leistungen": "Leistungen",
+            "nav-pakete": "Pakete",
+            "nav-ablauf": "Ablauf",
+            "nav-kontakt": "Anfrage stellen",
+            "hero-eyebrow": "Webdesign & Markenschutz · Europa",
+            "hero-title1": "Ihre Idee.",
+            "hero-title2": "Rechtlich gesichert.",
+            "hero-title3": "Digital präsent.",
+            "hero-sub": "Wir entwickeln digitale Identitäten, die nicht nur professionell aussehen — sondern rechtlich geschützt und strategisch positioniert sind. Für Gründer, die langfristig denken.",
+            "hero-cta1": "Kostenlose Erstberatung",
+            "hero-cta2": "Pakete ansehen",
+            "hero-scroll": "Entdecken",
+            "trust-1-title": "EUIPO Ready",
+            "trust-1-text": "Europaweiter Markenschutz",
+            "trust-2-title": "DSGVO Konform",
+            "trust-2-text": "Rechtssichere Umsetzung",
+            "trust-3-title": "Hosting-frei",
+            "trust-3-text": "Keine laufenden Serverkosten",
+            "trust-4-title": "Mehrsprachig",
+            "trust-4-text": "DE · EN · TR",
+            "leistungen-label": "Leistungen",
+            "leistungen-title1": "Mehr als eine Website.",
+            "leistungen-title2": "Ein vollständiges Schutzschild.",
+            "leistungen-sub": "Viele Gründer investieren in Design, bevor ihre Marke rechtlich gesichert ist. Wir lösen beides gleichzeitig.",
+            "feature1-title": "Markenrecherche & Schutz",
+            "feature1-text": "Vor jedem Projekt prüfen wir Ihre Markenidentität im EUIPO- und ePATS-Register. Abmahnungen kosten mehr als Vorbeugung — wir schützen Sie bevor es teuer wird.",
+            "feature2-title": "Premium Webentwicklung",
+            "feature2-text": "Maßgeschneiderte, schnell ladende Webseiten ohne aufgeblähte CMS-Systeme. Ihr Code gehört Ihnen — vollständig, dokumentiert und wartungsfrei deploybar.",
+            "feature3-title": "Domain-Architektur",
+            "feature3-text": "Strategische Planung Ihrer digitalen Adresse. Welche Endungen sichern Ihre Marke? Wie leiten Sie Traffic optimal? Wir bauen das Fundament richtig.",
+            "feature4-title": "Mehrsprachige Präsenz",
+            "feature4-text": "Automatische Spracherkennung — Ihre Besucher sehen die Seite in ihrer Sprache, ohne separate Domains oder komplexe Systeme. Ein Auftritt, alle Märkte.",
+            "feature5-title": "IP-Dokumentation",
+            "feature5-text": "Vollständige Urheberschutz-Dokumentation Ihres digitalen Werks. Ihr geistiges Eigentum ist genauso schützenswert wie Ihr Markenname.",
+            "feature6-title": "Laufender Support",
+            "feature6-text": "Kein Projekt endet mit der Lieferung. Technischer Support, Updates und strategische Begleitung — damit Ihre digitale Präsenz langfristig stark bleibt.",
+            "pakete-label": "Pakete",
+            "pakete-title": "Transparent. Klar. Kalkulierbar.",
+            "pakete-sub": "Drei Pakete für drei Wachstumsphasen. Kein Kleingedrucktes.",
+            "starter-name": "Digital Start",
+            "starter-tagline": "Für Solopreneure und erste digitale Präsenz.",
+            "starter-f1": "Premium Landing Page",
+            "starter-f2": "Nationale Markenrecherche (DE / TR)",
+            "starter-f3": "Domain-Setup & DNS-Konfiguration",
+            "starter-f4": "DSGVO-konforme Einrichtung",
+            "starter-f5": "Hosting-freie Infrastruktur",
+            "starter-btn": "Anfrage stellen",
+            "pro-badge": "Empfohlen",
+            "pro-name": "Brand Atelier",
+            "pro-tagline": "Das vollständige Paket für wachsende Marken.",
+            "pro-f1": "Webdesign bis 5 Seiten",
+            "pro-f2": "EUIPO Markenanmeldung (vollständig)",
+            "pro-f3": "Mehrsprachige Struktur (DE / EN)",
+            "pro-f4": "SEO-Grundoptimierung",
+            "pro-f5": "IP-Dokumentation & Quellcode-Übergabe",
+            "pro-f6": "12 Monate technischer Support",
+            "pro-btn": "Auswählen",
+            "enterprise-name": "Enterprise Global",
+            "enterprise-tagline": "Für etablierte Unternehmen mit globaler Vision.",
+            "enterprise-f1": "E-Commerce & Bestellsystem",
+            "enterprise-f2": "Dreisprach-Architektur (DE / EN / TR)",
+            "enterprise-f3": "Globaler IP- & Markenschutz-Komplettservice",
+            "enterprise-f4": "KI-gestützte Funktionen",
+            "enterprise-f5": "Ciro-Partnerschaft auf Anfrage",
+            "enterprise-f6": "Priorisierter Support & Strategie-Coaching",
+            "enterprise-btn": "Kontakt aufnehmen",
+            "ablauf-label": "Ablauf",
+            "ablauf-title1": "Von der Idee zur",
+            "ablauf-title2": "gesicherten Marke.",
+            "step1-title": "Erstgespräch & Analyse",
+            "step1-text": "Wir verstehen Ihr Projekt, Ihre Zielgruppe und Ihre Märkte. Keine Standardlösungen — jedes Projekt beginnt mit echtem Zuhören.",
+            "step2-title": "Markenrecherche",
+            "step2-text": "Bevor ein einziger Code geschrieben wird, prüfen wir Ihre Markenidentität auf Konflikte im EUIPO- und nationalen Register.",
+            "step3-title": "Design & Entwicklung",
+            "step3-text": "Maßgeschneidertes Design, entwickelt in Ihren Markenwerten. Schnell, wartungsarm, ohne überflüssige Abhängigkeiten.",
+            "step4-title": "Übergabe & Schutz",
+            "step4-text": "Vollständige Quellcode-Übergabe, IP-Dokumentation und — je nach Paket — Einreichung Ihrer Markenanmeldung beim EUIPO.",
+            "kontakt-label": "Kontakt",
+            "kontakt-title1": "Bereit für den",
+            "kontakt-title2": "nächsten Schritt?",
+            "kontakt-sub": "Kostenloses Erstgespräch, unverbindlich. Schreiben Sie uns einfach eine E-Mail.",
+            "kontakt-email-label": "📧 Direkter Draht zu uns:",
+            "kontakt-email-note": "Wir melden uns innerhalb von 24 Stunden.",
+            "footer-copy": "© 2026 PACDI Global. Alle Rechte vorbehalten.",
+            "footer-impressum": "Impressum",
+            "footer-datenschutz": "Datenschutz",
+            "footer-manifesto": "„Technologie im Dienste der Menschlichkeit.\""
+        },
+        en: {
+            "nav-leistungen": "Services",
+            "nav-pakete": "Packages",
+            "nav-ablauf": "Process",
+            "nav-kontakt": "Contact",
+            "hero-eyebrow": "Web Design & Trademark Protection · Europe",
+            "hero-title1": "Your idea.",
+            "hero-title2": "Legally secured.",
+            "hero-title3": "Digitally present.",
+            "hero-sub": "We develop digital identities that not only look professional — but are legally protected and strategically positioned. For founders who think long-term.",
+            "hero-cta1": "Free initial consultation",
+            "hero-cta2": "View packages",
+            "hero-scroll": "Discover",
+            "trust-1-title": "EUIPO Ready",
+            "trust-1-text": "Europe-wide trademark protection",
+            "trust-2-title": "GDPR Compliant",
+            "trust-2-text": "Legally secure implementation",
+            "trust-3-title": "Hosting-free",
+            "trust-3-text": "No ongoing server costs",
+            "trust-4-title": "Multilingual",
+            "trust-4-text": "DE · EN · TR",
+            "leistungen-label": "Services",
+            "leistungen-title1": "More than a website.",
+            "leistungen-title2": "A complete shield.",
+            "leistungen-sub": "Many founders invest in design before their brand is legally secured. We solve both at the same time.",
+            "feature1-title": "Trademark search & protection",
+            "feature1-text": "Before any code is written, we check your brand identity for conflicts in the EUIPO and national registers. Cease-and-desist letters cost more than prevention — we protect you before it gets expensive.",
+            "feature2-title": "Premium web development",
+            "feature2-text": "Custom-built, fast-loading websites without bloated CMS systems. Your code is yours — complete, documented, and maintenance-free deployable.",
+            "feature3-title": "Domain architecture",
+            "feature3-text": "Strategic planning of your digital address. Which extensions secure your brand? How do you optimize traffic? We build the right foundation.",
+            "feature4-title": "Multilingual presence",
+            "feature4-text": "Automatic language detection — your visitors see the site in their language, without separate domains or complex systems. One appearance, all markets.",
+            "feature5-title": "IP documentation",
+            "feature5-text": "Complete copyright protection documentation for your digital work. Your intellectual property is just as valuable as your brand name.",
+            "feature6-title": "Ongoing support",
+            "feature6-text": "No project ends with delivery. Technical support, updates and strategic guidance — to keep your digital presence strong in the long term.",
+            "pakete-label": "Packages",
+            "pakete-title": "Transparent. Clear. Calculable.",
+            "pakete-sub": "Three packages for three growth phases. No fine print.",
+            "starter-name": "Digital Start",
+            "starter-tagline": "For solopreneurs and first digital presence.",
+            "starter-f1": "Premium landing page",
+            "starter-f2": "National trademark search (DE / TR)",
+            "starter-f3": "Domain setup & DNS configuration",
+            "starter-f4": "GDPR-compliant setup",
+            "starter-f5": "Hosting-free infrastructure",
+            "starter-btn": "Inquire now",
+            "pro-badge": "Recommended",
+            "pro-name": "Brand Atelier",
+            "pro-tagline": "The complete package for growing brands.",
+            "pro-f1": "Web design up to 5 pages",
+            "pro-f2": "EUIPO trademark registration (complete)",
+            "pro-f3": "Multilingual structure (DE / EN)",
+            "pro-f4": "Basic SEO optimization",
+            "pro-f5": "IP documentation & source code handover",
+            "pro-f6": "12 months of technical support",
+            "pro-btn": "Select",
+            "enterprise-name": "Enterprise Global",
+            "enterprise-tagline": "For established companies with a global vision.",
+            "enterprise-f1": "E-commerce & ordering system",
+            "enterprise-f2": "Trilingual architecture (DE / EN / TR)",
+            "enterprise-f3": "Global IP & trademark protection complete service",
+            "enterprise-f4": "AI-supported functions",
+            "enterprise-f5": "Revenue-sharing partnership on request",
+            "enterprise-f6": "Priority support & strategy coaching",
+            "enterprise-btn": "Contact us",
+            "ablauf-label": "Process",
+            "ablauf-title1": "From idea to",
+            "ablauf-title2": "secured brand.",
+            "step1-title": "Initial consultation & analysis",
+            "step1-text": "We understand your project, your target audience and your markets. No standard solutions — every project starts with real listening.",
+            "step2-title": "Trademark search",
+            "step2-text": "Before a single line of code is written, we check your brand identity for conflicts in the EUIPO and national registers.",
+            "step3-title": "Design & development",
+            "step3-text": "Custom design, developed according to your brand values. Fast, low-maintenance, without unnecessary dependencies.",
+            "step4-title": "Handover & protection",
+            "step4-text": "Complete source code handover, IP documentation and — depending on the package — filing of your trademark application with the EUIPO.",
+            "kontakt-label": "Contact",
+            "kontakt-title1": "Ready for the",
+            "kontakt-title2": "next step?",
+            "kontakt-sub": "Free initial consultation, non-binding. Simply send us an email.",
+            "kontakt-email-label": "📧 Direct line to us:",
+            "kontakt-email-note": "We will get back to you within 24 hours.",
+            "footer-copy": "© 2026 PACDI Global. All rights reserved.",
+            "footer-impressum": "Imprint",
+            "footer-datenschutz": "Privacy",
+            "footer-manifesto": "„Technology in the service of humanity.\""
+        },
+        tr: {
+            "nav-leistungen": "Hizmetler",
+            "nav-pakete": "Paketler",
+            "nav-ablauf": "Süreç",
+            "nav-kontakt": "İletişim",
+            "hero-eyebrow": "Web Tasarım & Marka Koruma · Avrupa",
+            "hero-title1": "Fikriniz.",
+            "hero-title2": "Yasal olarak güvence altında.",
+            "hero-title3": "Dijital olarak mevcut.",
+            "hero-sub": "Sadece profesyonel görünmekle kalmayıp aynı zamanda yasal olarak korunan ve stratejik olarak konumlandırılmış dijital kimlikler geliştiriyoruz. Uzun vadeli düşünen girişimciler için.",
+            "hero-cta1": "Ücretsiz ilk danışma",
+            "hero-cta2": "Paketleri inceleyin",
+            "hero-scroll": "Keşfet",
+            "trust-1-title": "EUIPO Hazır",
+            "trust-1-text": "Avrupa çapında marka koruması",
+            "trust-2-title": "KVKK Uyumlu",
+            "trust-2-text": "Yasal güvenli uygulama",
+            "trust-3-title": "Hosting yok",
+            "trust-3-text": "Sürekli sunucu maliyeti yok",
+            "trust-4-title": "Çok Dilli",
+            "trust-4-text": "DE · EN · TR",
+            "leistungen-label": "Hizmetler",
+            "leistungen-title1": "Bir web sitesinden fazlası.",
+            "leistungen-title2": "Eksiksiz bir kalkan.",
+            "leistungen-sub": "Birçok girişimci, markası yasal olarak güvence altına alınmadan önce tasarıma yatırım yapar. Biz ikisini aynı anda çözüyoruz.",
+            "feature1-title": "Marka araştırması & koruma",
+            "feature1-text": "Her projeden önce marka kimliğinizi EUIPO ve ulusal sicillerde çakışmalara karşı kontrol ediyoruz. İhtarnameler önlemekten daha pahalıdır — sizi pahalıya patlamadan koruyoruz.",
+            "feature2-title": "Premium web geliştirme",
+            "feature2-text": "Şişkin CMS sistemleri olmadan, size özel, hızlı yüklenen web siteleri. Kodunuz size aittir — tam, belgeli ve bakım gerektirmeden dağıtılabilir.",
+            "feature3-title": "Domain mimarisi",
+            "feature3-text": "Dijital adresinizin stratejik planlaması. Hangi uzantılar markanızı korur? Trafiği nasıl optimize edersiniz? Temeli doğru inşa ediyoruz.",
+            "feature4-title": "Çok dilli varlık",
+            "feature4-text": "Otomatik dil algılama — ziyaretçileriniz siteyi kendi dillerinde görür, ayrı domainler veya karmaşık sistemler olmadan. Tek görünüm, tüm pazarlar.",
+            "feature5-title": "Fikri mülkiyet dokümantasyonu",
+            "feature5-text": "Dijital çalışmanız için eksiksiz telif hakkı koruma belgeleri. Fikri mülkiyetiniz marka adınız kadar değerlidir.",
+            "feature6-title": "Sürekli destek",
+            "feature6-text": "Hiçbir proje teslimatla bitmez. Teknik destek, güncellemeler ve stratejik rehberlik — dijital varlığınızı uzun vadede güçlü tutmak için.",
+            "pakete-label": "Paketler",
+            "pakete-title": "Şeffaf. Net. Hesaplanabilir.",
+            "pakete-sub": "Üç büyüme aşaması için üç paket. Küçük puntolar yok.",
+            "starter-name": "Dijital Başlangıç",
+            "starter-tagline": "Serbest girişimciler ve ilk dijital varlık için.",
+            "starter-f1": "Premium açılış sayfası",
+            "starter-f2": "Ulusal marka araştırması (DE / TR)",
+            "starter-f3": "Domain kurulumu & DNS yapılandırması",
+            "starter-f4": "KVKK uyumlu kurulum",
+            "starter-f5": "Hosting gerektirmeyen altyapı",
+            "starter-btn": "Talep oluştur",
+            "pro-badge": "Tavsiye Edilen",
+            "pro-name": "Marka Atölyesi",
+            "pro-tagline": "Büyüyen markalar için eksiksiz paket.",
+            "pro-f1": "5 sayfaya kadar web tasarımı",
+            "pro-f2": "EUIPO marka tescili (tam)",
+            "pro-f3": "Çok dilli yapı (DE / EN)",
+            "pro-f4": "Temel SEO optimizasyonu",
+            "pro-f5": "Fikri mülkiyet dokümantasyonu & kaynak kod teslimi",
+            "pro-f6": "12 ay teknik destek",
+            "pro-btn": "Seç",
+            "enterprise-name": "Kurumsal Global",
+            "enterprise-tagline": "Küresel vizyona sahip köklü şirketler için.",
+            "enterprise-f1": "E-ticaret & sipariş sistemi",
+            "enterprise-f2": "Üç dilli mimari (DE / EN / TR)",
+            "enterprise-f3": "Küresel fikri mülkiyet ve marka koruma komple hizmeti",
+            "enterprise-f4": "Yapay zeka destekli fonksiyonlar",
+            "enterprise-f5": "Talep üzerine ciroyu paylaşma ortaklığı",
+            "enterprise-f6": "Öncelikli destek & strateji koçluğu",
+            "enterprise-btn": "İletişime geç",
+            "ablauf-label": "Süreç",
+            "ablauf-title1": "Fikirden",
+            "ablauf-title2": "korunan markaya.",
+            "step1-title": "İlk görüşme & analiz",
+            "step1-text": "Projenizi, hedef kitlenizi ve pazarlarınızı anlıyoruz. Standart çözümler yok — her proje gerçek dinleme ile başlar.",
+            "step2-title": "Marka araştırması",
+            "step2-text": "Tek bir kod satırı yazılmadan önce, marka kimliğinizi EUIPO ve ulusal sicillerde çakışmalara karşı kontrol ediyoruz.",
+            "step3-title": "Tasarım & geliştirme",
+            "step3-text": "Marka değerlerinize göre geliştirilmiş, size özel tasarım. Hızlı, az bakım gerektiren, gereksiz bağımlılıklar olmadan.",
+            "step4-title": "Teslim & koruma",
+            "step4-text": "Eksiksiz kaynak kod teslimi, fikri mülkiyet dokümantasyonu ve — pakete bağlı olarak — EUIPO'ya marka tescil başvurunuzun yapılması.",
+            "kontakt-label": "İletişim",
+            "kontakt-title1": "Bir sonraki adım",
+            "kontakt-title2": "için hazır mısınız?",
+            "kontakt-sub": "Ücretsiz ilk danışma, bağlayıcı değil. Bize sadece bir e-posta gönderin.",
+            "kontakt-email-label": "📧 Bize doğrudan hat:",
+            "kontakt-email-note": "24 saat içinde size geri döneceğiz.",
+            "footer-copy": "© 2026 PACDI Global. Tüm hakları saklıdır.",
+            "footer-impressum": "Künye",
+            "footer-datenschutz": "Veri Koruma",
+            "footer-manifesto": "„Teknoloji insanlığın hizmetinde.\""
+        }
+    };
+
+    // ———— DOM REFS ————
+    var langBtns = document.querySelectorAll('.lang-btn');
+    var i18nElements = document.querySelectorAll('[data-i18n]');
+
+    // ———— apply language ————
+    function applyLanguage(lang) {
+        var t = i18n[lang];
+        if (!t) return;
+        for (var i = 0; i < i18nElements.length; i++) {
+            var el = i18nElements[i];
+            var key = el.getAttribute('data-i18n');
+            if (t[key] !== undefined) {
+                el.textContent = t[key];
+            }
+        }
+        for (var j = 0; j < langBtns.length; j++) {
+            var btn = langBtns[j];
+            btn.classList.remove('active');
+            if (btn.getAttribute('data-lang') === lang) {
+                btn.classList.add('active');
+            }
+        }
+        document.documentElement.lang = lang;
+        localStorage.setItem('pacdi-lang', lang);
+    }
+
+    // ———— load saved language ————
+    var savedLang = localStorage.getItem('pacdi-lang');
+    if (savedLang && i18n[savedLang]) {
+        applyLanguage(savedLang);
+    } else {
+        applyLanguage('de');
+    }
+
+    // ———— language buttons ————
+    for (var k = 0; k < langBtns.length; k++) {
+        langBtns[k].addEventListener('click', function() {
+            applyLanguage(this.getAttribute('data-lang'));
+        });
+    }
+
+    // ———— HEADER SHRINK ————
     (function() {
         var header = document.getElementById('siteHeader');
         if (!header) return;
@@ -1002,6 +1319,7 @@
     // ———— MOBILE HAMBURGER ————
     var hamburger = document.getElementById('hamburger');
     var navMobile = document.getElementById('navMobile');
+
     if (hamburger && navMobile) {
         hamburger.addEventListener('click', function() {
             this.classList.toggle('active');
@@ -1014,18 +1332,6 @@
             hamburger.classList.remove('active');
             navMobile.classList.remove('open');
         }
-    }
-
-    // ———— FORM HANDLER ————
-    function handleSubmit(e) {
-        e.preventDefault();
-        var btn = e.target.querySelector('button[type="submit"]');
-        if (!btn) return;
-        btn.textContent = '✓ Anfrage gesendet — Wir melden uns bald!';
-        btn.style.background = 'rgba(212,175,55,0.3)';
-        btn.style.color = '#D4AF37';
-        btn.disabled = true;
-        // Form verilerini toplayıp göndermek için buraya ekleme yapabilirsin
     }
 </script>
 
