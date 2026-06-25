@@ -543,10 +543,7 @@
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-E6ML8EDW0H"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-E6ML8EDW0H");</script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8426936740213369" crossorigin="anonymous"></script>
-    <link rel="canonical" href="https://pacdi.io/" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8426936740213369" crossorigin="anonymous"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E6ML8EDW0H"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-E6ML8EDW0H');</script>
+    <link rel="canonical" href="https://example.com/" />
 </head>
 <body>
 
@@ -816,13 +813,28 @@
 </footer>
 
 <script>
-    function handleSubmit(e) {
+        function handleSubmit(e) {
         e.preventDefault();
-        const btn = e.target.querySelector('button[type="submit"]');
-        btn.textContent = '✓ Anfrage gesendet — Wir melden uns bald!';
-        btn.style.background = 'rgba(212,175,55,0.3)';
-        btn.style.color = '#D4AF37';
-        btn.disabled = true;
+        var form = e.target;
+        var name = form.querySelector('input[type="text"]').value;
+        var email = form.querySelector('input[type="email"]').value;
+        var paket = form.querySelector('select').value;
+        var projekt = form.querySelector('textarea').value;
+        var subject = encodeURIComponent('PACDI Digital Anfrage: ' + name);
+        var body = encodeURIComponent('Name: ' + name + '
+E-Mail: ' + email + '
+Paket: ' + paket + '
+
+Projekt:
+' + projekt);
+        window.location.href = 'mailto:info@pacdi.eu?subject=' + subject + '&body=' + body;
+        var btn = form.querySelector('button[type="submit"]');
+        if (btn) {
+            btn.textContent = 'Anfrage gesendet. Vielen Dank!';
+            btn.style.background = 'rgba(212,175,55,0.3)';
+            btn.style.color = '#D4AF37';
+            btn.disabled = true;
+        }
     }
 </script>
 
