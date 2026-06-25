@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pacdi.digital/sitemap.xml
+Sitemap: https://pacdi.ip/sitemap.xml
