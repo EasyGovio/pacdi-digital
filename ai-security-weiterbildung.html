@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI Security Weiterbildung — PACDI Analysebericht für deutsche Bildungsträger. Marktanalyse, Curriculum-Bewertung und strategische Empfehlungen.">
+  <title>AI Security Weiterbildung | PACDI Analysebericht</title>
+  <link rel="canonical" href="https://pacdi.io/ai-security-weiterbildung/">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #04162E;
+      --surface: #0a1a30;
+      --surface2: #0f2240;
+      --border: rgba(246,180,95,0.2);
+      --border-strong: rgba(246,180,95,0.4);
+      --gold: #F6B45F;
+      --gold-dark: #d4941f;
+      --gold-dim: rgba(246,180,95,0.08);
+      --text: #e8edf2;
+      --muted: #7a9ab8;
+      --green: #34D399;
+      --green-dim: rgba(52,211,153,0.12);
+      --red: #f87171;
+      --red-dim: rgba(248,113,113,0.12);
+      --blue: #3498DB;
+      --blue-dim: rgba(52,152,219,0.12);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 8px 24px rgba(0,0,0,0.3);
+      --shadow-sm: 0 4px 12px rgba(0,0,0,0.2);
+      --transition: 0.25s ease;
+    }
+
+    [data-theme="light"] {
+      --bg: #f5f7fa;
+      --surface: #ffffff;
+      --surface2: #eef1f6;
+      --border: rgba(4,22,46,0.12);
+      --border-strong: rgba(4,22,46,0.22);
+      --text: #0a1a30;
+      --muted: #5a7080;
+      --gold-dim: rgba(212,148,31,0.1);
+      --green-dim: rgba(52,211,153,0.15);
+      --red-dim: rgba(248,113,113,0.15);
+      --blue-dim: rgba(52,152,219,0.15);
+      --shadow: 0 8px 24px rgba(4,22,46,0.08);
+      --shadow-sm: 0 4px 12px rgba(4,22,46,0.06);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    /* ── Header ── */
+    header {
+      background: color-mix(in srgb, var(--bg) 92%, transparent);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      position: sticky; top: 0; z-index: 100;
+      padding: 8px 24px;
+      transition: background var(--transition);
+    }
+    .header-inner { max-width: 1100px; margin: 0 auto; }
+    .header-top {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; gap: 12px; flex-wrap: wrap;
+    }
+    .logo-mark {
+      font-size: 1.05rem; font-weight: 800; color: var(--gold);
+      letter-spacing: 0.04em; white-space: nowrap; text-decoration: none;
+    }
+    .logo-mark span { color: var(--muted); font-weight: 400; font-size: 0.8rem; margin-left: 4px; }
+    .header-right {
+      display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+      padding-right: 44px; /* theme-toggle ile çakışmayı önler */
+    }
+    .lang-bar { display: flex; gap: 4px; }
+    .lang-btn {
+      background: transparent; border: 1px solid var(--border); color: var(--muted);
+      font-size: 0.62rem; font-weight: 700; padding: 3px 8px; border-radius: 10px;
+      cursor: pointer; font-family: inherit; text-transform: uppercase;
+      transition: var(--transition);
+    }
+    .lang-btn.active, .lang-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── Theme Toggle ── */
+    .theme-toggle {
+      position: fixed; top: 12px; right: 12px; z-index: 9999;
+      width: 2.2rem; height: 2.2rem; border: 1px solid var(--border);
+      border-radius: 50%; background: var(--surface); font-size: 1.05rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(4px); transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    .theme-toggle:hover { border-color: var(--gold); transform: scale(1.05); }
+
+    /* ── Main ── */
+    main { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, rgba(246,180,95,0.07) 0%, transparent 60%);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 40px 44px; margin-bottom: 40px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .hero h1 { font-size: 2rem; font-weight: 800; color: var(--gold); line-height: 1.2; }
+    .hero .subtitle { color: var(--muted); font-size: 1rem; max-width: 600px; }
+    .hero-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+    .badge {
+      font-size: 0.68rem; font-weight: 700; padding: 4px 12px; border-radius: 20px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .badge-gold { background: var(--gold-dim); color: var(--gold); border: 1px solid var(--border-strong); }
+    .badge-green { background: var(--green-dim); color: var(--green); border: 1px solid rgba(52,211,153,0.25); }
+    .badge-blue { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(52,152,219,0.25); }
+    .badge-red { background: var(--red-dim); color: var(--red); border: 1px solid rgba(248,113,113,0.25); }
+
+    /* ── Sections ── */
+    section { margin-bottom: 48px; }
+    .section-title {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--muted); margin-bottom: 20px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    }
+    h2 {
+      font-size: 1.5rem; font-weight: 800; color: var(--gold);
+      margin-bottom: 16px; line-height: 1.3;
+    }
+    h3 {
+      font-size: 1.1rem; font-weight: 700; color: var(--text);
+      margin-bottom: 10px; margin-top: 24px;
+    }
+    h4 {
+      font-size: 0.95rem; font-weight: 700; color: var(--gold);
+      margin-bottom: 8px; margin-top: 18px;
+    }
+    p { color: var(--text); margin-bottom: 12px; font-size: 0.92rem; }
+    .muted { color: var(--muted); font-size: 0.85rem; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px; margin-bottom: 16px;
+      transition: var(--transition);
+    }
+    .card:hover { border-color: var(--border-strong); }
+    .card-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px; margin-bottom: 24px;
+    }
+    .card-stat { text-align: center; padding: 20px; }
+    .card-stat .num {
+      font-size: 2rem; font-weight: 800; color: var(--gold);
+      line-height: 1.1; margin-bottom: 6px;
+    }
+    .card-stat .label { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── Tables ── */
+    .table-wrap { overflow-x: auto; margin-bottom: 24px; border-radius: var(--radius); border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    th {
+      background: var(--surface2); color: var(--gold); font-weight: 700;
+      padding: 12px 14px; text-align: left; font-size: 0.72rem;
+      text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+    }
+    td { padding: 10px 14px; border-top: 1px solid var(--border); color: var(--text); vertical-align: top; }
+    tr:hover td { background: var(--gold-dim); }
+
+    /* ── Lists ── */
+    ul, ol { padding-left: 20px; margin-bottom: 14px; }
+    li { margin-bottom: 6px; font-size: 0.9rem; }
+
+    /* ── Highlight Boxes ── */
+    .box {
+      border-radius: var(--radius-sm); padding: 16px 20px; margin-bottom: 16px;
+      border-left: 3px solid var(--gold); background: var(--gold-dim);
+      font-size: 0.88rem;
+    }
+    .box-green { border-left-color: var(--green); background: var(--green-dim); }
+    .box-red { border-left-color: var(--red); background: var(--red-dim); }
+    .box-blue { border-left-color: var(--blue); background: var(--blue-dim); }
+    .box strong { color: var(--gold); }
+
+    /* ── SWOT ── */
+    .swot {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+      margin-bottom: 24px;
+    }
+    .swot-item {
+      border-radius: var(--radius-sm); padding: 18px; border: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .swot-item h4 { margin-top: 0; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .swot-item ul { padding-left: 16px; margin-bottom: 0; }
+    .swot-item li { font-size: 0.82rem; }
+    .swot-s h4 { color: var(--green); }
+    .swot-w h4 { color: var(--red); }
+    .swot-o h4 { color: var(--blue); }
+    .swot-t h4 { color: var(--gold); }
+
+    /* ── Accordion ── */
+    .accordion { margin-bottom: 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+    .accordion-header {
+      background: var(--surface); padding: 14px 20px; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      font-weight: 600; font-size: 0.92rem; transition: var(--transition);
+      user-select: none;
+    }
+    .accordion-header:hover { background: var(--surface2); }
+    .accordion-header .arrow { transition: transform 0.25s; font-size: 0.7rem; color: var(--muted); }
+    .accordion.open .accordion-header .arrow { transform: rotate(180deg); }
+    .accordion-body { display: none; padding: 16px 20px; background: var(--surface); border-top: 1px solid var(--border); }
+    .accordion.open .accordion-body { display: block; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border); padding: 24px;
+      text-align: center; font-size: 0.72rem; color: var(--muted);
+      max-width: 1100px; margin: 0 auto;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      main { padding: 20px 16px 60px; }
+      .hero { padding: 28px 24px; }
+      .hero h1 { font-size: 1.5rem; }
+      .swot { grid-template-columns: 1fr; }
+      .card-grid { grid-template-columns: 1fr; }
+      .header-top { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media print {
+      header, .theme-toggle, footer { display: none; }
+      body { background: #fff; color: #000; }
+      .card, .table-wrap { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Theme Toggle -->
+<button class="theme-toggle" id="themeToggle" aria-label="Dark/Light Modus" title="Dark/Light">🌙</button>
+
+<!-- Header -->
+<header>
+  <div class="header-inner">
+    <div class="header-top">
+      <a href="https://pacdi.io" class="logo-mark">PACDI <span>Analysebericht</span></a>
+      <div class="header-right">
+        <div class="lang-bar">
+          <button class="lang-btn" onclick="setLanguage('tr')">TR</button>
+          <button class="lang-btn active" onclick="setLanguage('de')">DE</button>
+          <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ═══════════════════════════════════════ HERO ═══════════════════════════════════════ -->
+  <div class="hero">
+    <h1 data-i18n="hero_title">AI Security Weiterbildung</h1>
+    <p class="subtitle" data-i18n="hero_sub">
+      Analysebericht für deutsche Bildungsträger — Marktposition, Curriculum-Bewertung und strategische Empfehlungen für ein modulares, mehrsprachiges Weiterbildungsprogramm.
+    </p>
+    <div class="hero-badges">
+      <span class="badge badge-gold" data-i18n="badge_azav">AZAV-fähig</span>
+      <span class="badge badge-green" data-i18n="badge_labs">32 Labs + Final Integrated</span>
+      <span class="badge badge-blue" data-i18n="badge_langs">DE / EN / TR</span>
+      <span class="badge badge-gold" data-i18n="badge_aiact">AI Act Art. 4 konform</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ 1. EXECUTIVE SUMMARY ═══════════════════════════════════════ -->
+  <section>
+    <div class="section-title" data-i18n="sec_summary">01 — Executive Summary</div>
+    <h2 data-i18n="summary_title">Executive Summary</h2>
+
+    <div class="card-grid">
+      <div class="card card-stat">
+        <div class="num">32</div>
+        <div class="label" data-i18n="stat_labs">Laboratorien + Final Integrated Lab</div>
+      </div>
+      <div class="card card-stat">
+        <div class="num">3</div>
+        <div class="label" data-i18n="stat_levels">Aufbauende Ebenen (I → II → III)</div>
+      </div>
+      <div class="card card-stat">
+        <div class="num">0</div>
+        <div class="label" data-i18n="stat_competitors">Direkte Wettbewerber mit Governance/Evidence-Fokus</div>
+      </div>
+      <div class="card card-stat">
+        <div class="num">120</div>
+        <div class="label" data-i18n="stat_days">Ausbildungstage (Vollzeit, inkl. Praktikum)</div>
+      </div>
+    </div>
+
+    <div class="box">
+      <strong data-i18n="summary_key">Kernbefund:</strong>
+      <span data-i18n="summary_key_text">
+        Der Markt für AI-Security-Weiterbildungen in Deutschland ist entweder von kurzen Workshops (14 Std.) oder von eng gefassten Zertifizierungen (CAISP, OSAI+) dominiert. Ein ganzheitliches Programm, das epistemologische Unterscheidungen wie „Policy ≠ Enforcement“ und „PASS ≠ Security“ zum Curriculum-Rückgrat macht, existiert nicht. Dieses Programm füllt diese Lücke.
+      </span>
+    </div>
+
+    <div class="box box-green">
+      <strong data-i18n="summary_azav">Strategischer Hebel:</strong>
+      <span data-i18n="summary_azav_text">
+        Eine Partnerschaft mit einem AZAV-akkreditierten Bildungsträger löst die beiden größten Schwächen des Projekts (fehlende Akkreditierung und fehlende Dozentenkapazität) direkt. PACDI positioniert sich als inhaltlicher und methodischer Urheber; die operative Last verbleibt beim Partner.
+      </span>
+    </div>
+
+    <div class="box box-red">
+      <strong data-i18n="summary_risk">Kritisches Risiko:</strong>
+      <span data-i18n="summary_risk_text">
+        Der Inhalt wurde bisher auf Basis eines einzigen Falls (PACDI) entwickelt. Ohne Erweiterung um sektorale Fallstudien (Gesundheit, Finanzen, Produktion) wird die Skalierung auf einen breiten Kundenstamm schwierig.
+      </span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ 2. MARKET ANALYSIS ═══════════════════════════════════════ -->
+  <section>
+    <div class="section-title" data-i18n="sec_market">02 — Marktanalyse</div>
+    <h2 data-i18n="market_title">Marktposition und Wettbewerb</h2>
+
+    <h3 data-i18n="market_de">Deutschland: Bestehende Anbieter</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="th_provider">Anbieter</th>
+            <th data-i18n="th_product">Produkt</th>
+            <th data-i18n="th_price">Preis</th>
+            <th data-i18n="th_duration">Dauer</th>
+            <th>AZAV</th>
+            <th data-i18n="th_lang">Sprache</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>alfatraining</td>
+            <td data-i18n="td_alfa">KI-Zertifikatskurse (TÜV Rheinland)</td>
+            <td data-i18n="td_free_bg">Kostenlos mit Bildungsgutschein</td>
+            <td>4 Wochen</td>
+            <td>✅</td>
+            <td>DE</td>
+          </tr>
+          <tr>
+            <td>KI/AI + Security</td>
+            <td data-i18n="td_kisec">Level 1/2 — Python, ML, Bedrohungsabwehr</td>
+            <td data-i18n="td_free_bg">Kostenlos mit Bildungsgutschein</td>
+            <td>3–6 Wochen</td>
+            <td>✅</td>
+            <td>DE</td>
+          </tr>
+          <tr>
+            <td>MSIT</td>
+            <td>AI Cyber Security Engineer</td>
+            <td data-i18n="td_free_bg">Kostenlos mit Bildungsgutschein</td>
+            <td>12–24 Monate</td>
+            <td>✅</td>
+            <td>DE/EN</td>
+          </tr>
+          <tr>
+            <td>IHK</td>
+            <td>KI-Manager/in, AI Agent Manager</td>
+            <td>2.500–4.000 €</td>
+            <td>6–10 Monate</td>
+            <td>✅</td>
+            <td>DE</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 data-i18n="market_intl">Internationaler Vergleich</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="th_provider">Anbieter</th>
+            <th data-i18n="th_product">Produkt</th>
+            <th data-i18n="th_price">Preis</th>
+            <th data-i18n="th_duration">Dauer</th>
+            <th data-i18n="th_lang">Sprache</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Practical DevSecOps</td>
+            <td>CAISP</td>
+            <td>$1.099–1.199</td>
+            <td>60 Tage</td>
+            <td>EN</td>
+          </tr>
+          <tr>
+            <td>OffSec</td>
+            <td>AI-300 / OSAI+</td>
+            <td>$1.749–2.749</td>
+            <td>50–100 Std.</td>
+            <td>EN</td>
+          </tr>
+          <tr>
+            <td>SANS</td>
+            <td>SEC536</td>
+            <td>$2.629–3.505</td>
+            <td>2 Tage</td>
+            <td>EN</td>
+          </tr>
+          <tr>
+            <td>EC-Council</td>
+            <td>C|OASP</td>
+            <td>$1.699–3.499</td>
+            <td>~495 Min. + 30 Labs</td>
+            <td>EN</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-blue">
+      <strong data-i18n="market_gap">Marktlücke:</strong>
+      <span data-i18n="market_gap_text">
+        Kein Anbieter kombiniert ein durchgängiges konzeptionelles Fundament (Governance/Evidence/Composition), ein mehrstufiges Curriculum mit Peer-Red-Team/Blue-Team und ein prüfbares Portfolio-Ergebnis in einem kohärenten Programm.
+      </span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ 3. STRENGTHS ═══════════════════════════════════════ -->
+  <section>
+    <div class="section-title" data-i18n="sec_strengths">03 — Stärken des Curriculums</div>
+    <h2 data-i18n="strengths_title">Stärken des Curriculums</h2>
+
+    <div class="card">
+      <h4 data-i18n="strength1">Konzeptionelle Tiefe und Unterscheidungsdisziplin</h4>
+      <p data-i18n="strength1_text">
+        Das Curriculum baut technisches Angriffswissen auf strukturellen Denkmodellen auf. Die durchgängig behandelten Unterscheidungen sind in den meisten Marktangeboten entweder nicht vorhanden oder nur oberflächlich:
+      </p>
+      <ul>
+        <li><strong>DATA ≠ INSTRUCTION ≠ AUTHORITY</strong> — <span data-i18n="strength1_a">Datenvertrauen und Instruktionsbefugnis sind getrennte Achsen.</span></li>
+        <li><strong>READ ≠ COMBINE ≠ DERIVE ≠ DISCLOSE</strong> — <span data-i18n="strength1_b">Datenzugriff, Kombination, Ableitung und Offenlegung haben separate Autorisierungsgrenzen.</span></li>
+        <li><strong>POLICY ≠ ENFORCEMENT ≠ EVIDENCE</strong> — <span data-i18n="strength1_c">Die Existenz einer Richtlinie beweist nicht ihre Durchsetzung; ein bestandener Test beweist nicht die Sicherheitsbehauptung.</span></li>
+        <li><strong>CORROBORATION ≠ INDEPENDENCE</strong> — <span data-i18n="strength1_d">Mehrere „Belege“ aus derselben Quelle sind keine unabhängige Verifizierung.</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h4 data-i18n="strength2">Dreistufige Struktur und Portfolio-Ergebnis</h4>
+      <p data-i18n="strength2_text">
+        Ebene I (KI-Grundkompetenz) → Ebene II (Theorie & Labore) → Ebene III (Praktikum mit Peer-Red-Team/Blue-Team). Das Prinzip „Nachweis statt Selbstauskunft“ produziert für Arbeitgeber einen konkreten, prüfbaren Nachweis — besonders relevant für Jobcenter und Agentur für Arbeit.
+      </p>
+    </div>
+
+    <div class="card">
+      <h4 data-i18n="strength3">Mess- und Dokumentationsdisziplin</h4>
+      <p data-i18n="strength3_text">
+        Jedes Modul folgt dem Raster: Lernziel → Theoriezeit → Laborzeit → Praktikum → erwartetes Ergebnis → Bewertung → Nachweis/Portfolio. Diese Struktur ist direkt mit den Qualitätssicherungsanforderungen von AZAV-Prüfungen kompatibel.
+      </p>
+    </div>
+
+    <div class="card">
+      <h4 data-i18n="strength4">Mehrsprachigkeit als struktureller Vorteil</h4>
+      <p data-i18n="strength4_text">
+        Das Curriculum ist von Grund auf mehrsprachig (DE/EN/TR) konzipiert. Wichtig: Die türkische Sprachversion ist als optionale Erweiterung positioniert — nicht als Voraussetzung für die Förderfähigkeit durch deutsche Arbeitsagenturen. Sie richtet sich an Bildungsträger, die Teilnehmergruppen mit türkischsprachigem Hintergrund betreuen.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ 4. GAPS ═══════════════════════════════════════ -->
+  <section>
+    <div class="section-title" data-i18n="sec_gaps">04 — Lücken & Entwicklungspotenzial</div>
+    <h2 data-i18n="gaps_title">Entwicklungsfelder im deutschen Kontext</h2>
+
+    <h3 data-i18n="gaps_aiact">AI Act Artikel 4: Aktueller Stand</h3>
+    <p data-i18n="gaps_aiact_text">
+      Artikel 4 ist seit dem 2. Februar 2025 in Kraft. Anbieter und Betreiber von KI-Systemen müssen Maßnahmen ergreifen, um die KI-Kompetenz ihrer Mitarbeiter zu fördern. <strong>Mit dem Digital Omnibus wurde die Vorschrift gelockert:</strong> Es wird kein bestimmtes Kompetenzniveau garantiert, und es gibt keine Zertifizierungspflicht. In der Praxis bedeutet dies: Organisationen müssen „Schulungs- und Sensibilisierungsprogramme dokumentieren“. Der Bedarf entsteht daher nicht aus „Zertifikaten“, sondern aus <strong>„nachweisbarer Kompetenz“</strong>.
+    </p>
+
+    <div class="box box-red">
+      <strong data-i18n="gaps_aiact_warn">Wichtig für die Außendarstellung:</strong>
+      <span data-i18n="gaps_aiact_warn_text">
+        Formulierungen wie „AI Act-konformes Zertifikat“ sollten vermieden werden, da keine gesetzliche Zertifizierungspflicht besteht. Stattdessen: „Dokumentierbare Weiterbildung im Sinne von AI Act Artikel 4“.
+      </span>
+    </div>
+
+    <h3 data-i18n="gaps_segments">Zielgruppensegmentierung</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="th_segment">Segment</th>
+            <th data-i18n="th_need">Bedarf</th>
+            <th data-i18n="th_level">Empfohlene Ebene</th>
+            <th data-i18n="th_duration2">Dauer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-i18n="seg1">IT-Sicherheitsprofis</td>
+            <td data-i18n="seg1_need">Technische Tiefe, Red Teaming, Agent-Sicherheit</td>
+            <td>Ebene II + III</td>
+            <td>40–60 Tage</td>
+          </tr>
+          <tr>
+            <td data-i18n="seg2">KI-Nutzer / White-Collar</td>
+            <td data-i18n="seg2_need">Sichere KI-Nutzung, Prompt-Sicherheit, Datenschutz</td>
+            <td>Ebene I + II (ausgewählt)</td>
+            <td>15–20 Tage</td>
+          </tr>
+          <tr>
+            <td data-i18n="seg3">Führungskräfte / Entscheider</td>
+            <td data-i18n="seg3_need">KI-Risikogovernance, Policy/Enforcement, Audit</td>
+            <td data-i18n="seg3_level">Sondermodul (Management Summary)</td>
+            <td>3–5 Tage</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 data-i18n="gaps_sectors">Sektorale Fallstudien</h3>
+    <p data-i18n="gaps_sectors_text">
+      Der Inhalt basiert bisher auf CRM-, HR- und Kundensupport-Szenarien. Für den deutschen Markt sind mindestens drei sektorale Module erforderlich:
+    </p>
+    <ul>
+      <li><strong>Gesundheit:</strong> <span data-i18n="sector_health">KI-Sicherheit in klinischen Entscheidungsunterstützungssystemen, Patientendatenschutz, medizinische KI-Validierung.</span></li>
+      <li><strong>Finanzen:</strong> <span data-i18n="sector_finance">Bias in Kreditscoring-Modellen, adversarial attacks in Betrugserkennung, Audit-Trail.</span></li>
+      <li><strong>Produktion:</strong> <span data-i18n="sector_prod">KI-Sicherheit in industriellen IoT- und Robotiksystemen, Sicherheitsbeschränkungen, Mensch-Maschine-Interaktion.</span></li>
+    </ul>
+
+    <h3 data-i18n="gaps_trainer">Dozentenschulung</h3>
+    <p data-i18n="gaps_trainer_text">
+      Ein „Train-the-Trainer“-Modul (5–10 Tage) ist erforderlich: Konzeptioneller Rahmen, LAB-Durchführung und -Bewertung, Peer-Red-Team/Blue-Team-Facilitation, AZAV-Dokumentationsanforderungen.
+    </p>
+  </section>
+
+  <!-- ═══════════════════════════════════════ 5. 15 PROFESSIONS ═══════════════════════════════════════ -->
+  <section>
+    <div class="section-title" data-i18n="sec_professions">05 — Berufsbilder</div>
+    <h2 data-i18n="professions_title">15 Berufsbilder: KI-Kompetenzanforderungen im deutschen Markt</h2>
+    <p class="muted" data-i18n="professions_note">
+      Basierend auf aktuellen Stellenausschreibungen in Deutschland (Deloitte, BMW, Personio, KPMG, alfatraining, IHK u.a.).
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th data-i18n="th_job">Berufsbild</th>
+            <th data-i18n="th_tasks">Typische Aufgaben</th>
+            <th data-i18n="th_skills">Gefragte KI-Kompetenzen</th>
+            <th data-i18n="th_match">Set-Zuordnung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td data-i18n="job1">Automatisierungsberater</td>
+            <td data-i18n="job1_tasks">Prozessanalyse, RPA/IDP-Lösungen, Low-Code-Plattformen</td>
+            <td data-i18n="job1_skills">Low-Code/No-Code, Conversational AI, Dokumentenverarbeitung, Python/JS</td>
+            <td>Set 1 — <span data-i18n="direct">Direkt</span></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td data-i18n="job2">Content-Operator</td>
+            <td data-i18n="job2_tasks">KI-gestützte Content-Produktion, Multi-Tool-Orchestrierung</td>
+            <td data-i18n="job2_skills">Prompt Engineering, Multi-Modell-Management, Inhaltsverifizierung</td>
+            <td>Set 1 — <span data-i18n="direct">Direkt</span></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td data-i18n="job3">Cybersicherheitsexperte</td>
+            <td data-i18n="job3_tasks">Bedrohungsanalyse für KI-Systeme, OWASP LLM Top 10, RAG-Sicherheit</td>
+            <td data-i18n="job3_skills">LLM-Sicherheit, Prompt Injection, Agent-Sicherheit, NIST AI RMF</td>
+            <td>Set 2 — <span data-i18n="direct">Direkt</span></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td data-i18n="job4">Personal-Brand-Stratege</td>
+            <td data-i18n="job4_tasks">Sichtbarkeit in KI-Suchsystemen, Content-Strategie</td>
+            <td data-i18n="job4_skills">KI-Suchoptimierung, Content-KI-Tools</td>
+            <td>Set 1 — <span data-i18n="indirect">Indirekt</span></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td data-i18n="job5">KI-Produktdesigner</td>
+            <td data-i18n="job5_tasks">KI-native Produkterfahrung, multimodale Interfaces</td>
+            <td data-i18n="job5_skills">LLM-Grenzen, agentisches Design, KI-gestütztes Prototyping</td>
+            <td>Set 1 — <span data-i18n="partial">Teilweise</span></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td data-i18n="job6">Prompt-/Workflow-Architekt</td>
+            <td data-i18n="job6_tasks">Prompt-Architektur, agentische Workflows, RAG-Integration</td>
+            <td data-i18n="job6_skills">Prompt Engineering, Agent-Orchestrierung, RAG, EU AI Act</td>
+            <td>Set 1 — <span data-i18n="direct">Direkt</span></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td data-i18n="job7">Datenanalyst</td>
+            <td data-i18n="job7_tasks">BI-Tools (Tableau/Power BI), SQL, Python, ML-Grundlagen</td>
+            <td data-i18n="job7_skills">Python (pandas/scikit-learn), SQL, ML-Konzepte, LLM Evaluation</td>
+            <td>Set 1 — <span data-i18n="partial">Teilweise</span></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td data-i18n="job8">Video-KI-Creator</td>
+            <td data-i18n="job8_tasks">KI-Videoproduktion, digitale Charaktere, automatischer Schnitt</td>
+            <td data-i18n="job8_skills">KI-Video-Tools, multimodale Produktion, Urheberrecht</td>
+            <td>Set 1 — <span data-i18n="indirect">Indirekt</span></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td data-i18n="job9">Community-Builder</td>
+            <td data-i18n="job9_tasks">KI-gestütztes Community-Management, personalisierte Kommunikation</td>
+            <td data-i18n="job9_skills">KI-Tools, Datenanalyse, Personalisierung</td>
+            <td>Set 1 — <span data-i18n="indirect">Indirekt</span></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td data-i18n="job10">KI-Trainer</td>
+            <td data-i18n="job10_tasks">Unternehmens-KI-Schulungen, Curriculum-Design, Kompetenzmessung</td>
+            <td data-i18n="job10_skills">KI-Tools (ChatGPT/Claude), Pädagogik, KPI-Tracking</td>
+            <td>Set 1 + Set 2 — <span data-i18n="direct">Direkt</span></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td data-i18n="job11">Remote-Sales-Closer</td>
+            <td data-i18n="job11_tasks">KI-Vertriebsagenten, Echtzeit-Coaching, Gesprächsanalyse</td>
+            <td data-i18n="job11_skills">KI-Vertriebstools, Automatisierung, Datenanalyse</td>
+            <td>Set 1 — <span data-i18n="indirect">Indirekt</span></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td data-i18n="job12">Gesundheitstechnologie-Spezialist</td>
+            <td data-i18n="job12_tasks">Klinische Entscheidungsunterstützung, medizinische KI-Validierung</td>
+            <td data-i18n="job12_skills">Medizinische KI-Bewertung, DSGVO/HIPAA, klinische Validierung</td>
+            <td>Set 1 — <span data-i18n="partial">Teilweise</span></td>
+          </tr>
+          <tr>
+            <td>13</td>
+            <td data-i18n="job13">Indie-SaaS-Gründer</td>
+            <td data-i18n="job13_tasks">KI-Coding-Tools, KI-gestütztes Marketing, Kundenfeedback-Analyse</td>
+            <td data-i18n="job13_skills">KI-Coding-Tools, KI-Marketing, Produktmanagement</td>
+            <td>Set 1 — <span data-i18n="indirect">Indirekt</span></td>
+          </tr>
+          <tr>
+            <td>14</td>
+            <td data-i18n="job14">Digital-Asset-Creator</td>
+            <td data-i18n="job14_tasks">KI-Avatare/digitale Zwillinge, Tokenisierung, Monetarisierung</td>
+            <td data-i18n="job14_skills">KI-Avatar-Produktion, Digital-Asset-Management</td>
+            <td>Set 1 — <span data-i18n="indirect">Indirekt</span></td>
+          </tr>
+          <tr>
+            <td>15</td>
+            <td data-i18n="job15">Mensch + KI-Operator</td>
+            <td data-i18n="job15_tasks">KI-Agenten überwachen, Edge Cases, Compliance-Audit, Eskalation</td>
+            <td data-i18n="job15_skills">KI-Agent-Management, Monitoring, Compliance, Eskalation</td>
+            <td>Set 1 + Set 2 — <span data-i18n="direct">Direkt</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ 6. PRICING ═══════════════════════════════════════ -->
+  <section>
+    <div class="section-title" data-i18n="sec_pricing">06 — Preisstrategie</div>
+    <h2 data-i18n="pricing_title">Preispositionierung</h2>
+
+    <div class="card-grid">
+      <div class="card card-stat">
+        <div class="num">300–1.200 $</div>
+        <div class="label" data-i18n="price_tier1">Einstiegssegment (Self-Paced, enger Umfang)</div>
+      </div>
+      <div class="card card-stat">
+        <div class="num">1.700–3.500 $</div>
+        <div class="label" data-i18n="price_tier2">Mittel-Oberes Unternehmenssegment</div>
+      </div>
+      <div class="card card-stat">
+        <div class="num">2.500–4.000 €</div>
+        <div class="label" data-i18n="price_target">Empfohlene Zielpositionierung</div>
+      </div>
+    </div>
+
+    <div class="box">
+      <strong data-i18n="pricing_bg">Bildungsgutschein-Kompatibilität:</strong>
+      <span data-i18n="pricing_bg_text">
+        Bei Angebot über einen AZAV-akkreditierten Partner wird das Programm für Teilnehmer mit 0 € Eigenanteil zugänglich — ein kritischer Vorteil für Arbeitsuchende und Geringverdiener.
+      </span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ 7. SWOT ═══════════════════════════════════════ -->
+  <section>
+    <div class="section-title" data-i18n="sec_swot">07 — SWOT-Analyse</div>
+    <h2 data-i18n="swot_title">SWOT-Analyse</h2>
+
+    <div class="swot">
+      <div class="swot-item swot-s">
+        <h4>💪 <span data-i18n="swot_s">Stärken</span></h4>
+        <ul>
+          <li data-i18n="swot_s1">32 Labs + Final Integrated Lab + Pocket Reference Kit</li>
+          <li data-i18n="swot_s2">Governance/Evidence/Composition-Ebene im Markt einzigartig</li>
+          <li data-i18n="swot_s3">Halbfertige Checklisten und Templates</li>
+          <li data-i18n="swot_s4">Provenienz: klare Zuordnung aller Beiträge</li>
+        </ul>
+      </div>
+      <div class="swot-item swot-w">
+        <h4>⚠️ <span data-i18n="swot_w">Schwächen</span></h4>
+        <ul>
+          <li data-i18n="swot_w1">Bisher nur ein Fall (PACDI) als Grundlage</li>
+          <li data-i18n="swot_w2">Keine AZAV-Akkreditierung / Zertifikatsinfrastruktur</li>
+          <li data-i18n="swot_w3">Mehrsprachigkeit erfordert erheblichen Übersetzungsaufwand</li>
+          <li data-i18n="swot_w4">Physisches Format = Fixkosten, langsamere Skalierung</li>
+        </ul>
+      </div>
+      <div class="swot-item swot-o">
+        <h4>🚀 <span data-i18n="swot_o">Chancen</span></h4>
+        <ul>
+          <li data-i18n="swot_o1">Deutschland: Lücke bei Governance/Evidence-orientierten Kursen</li>
+          <li data-i18n="swot_o2">EU/KVKK-Regulierungsdruck erhöht Nachfrage</li>
+          <li data-i18n="swot_o3">Mehrsprachiges physisches Format erreicht neue Zielgruppen</li>
+          <li data-i18n="swot_o4">PACDI-Praxisfall als Glaubwürdigkeitsnachweis</li>
+        </ul>
+      </div>
+      <div class="swot-item swot-t">
+        <h4>🎯 <span data-i18n="swot_t">Risiken</span></h4>
+        <ul>
+          <li data-i18n="swot_t1">Große Anbieter könnten Governance-Module integrieren</li>
+          <li data-i18n="swot_t2">KI-Feld ändert sich schnell; gedruckte Module veralten</li>
+          <li data-i18n="swot_t3">Ohne Akkreditierung fordern Unternehmenskäufer „anerkannte Zertifikate“</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ 8. CURRICULUM ═══════════════════════════════════════ -->
+  <section>
+    <div class="section-title" data-i18n="sec_curriculum">08 — Curriculum-Empfehlungen</div>
+    <h2 data-i18n="curriculum_title">Curriculum-Empfehlungen</h2>
+
+    <div class="accordion open">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <span>Ebene I — KI-Grundkompetenz</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <ul>
+          <li data-i18n="curr_e1_a">AI Act Artikel 4: Bedeutung der KI-Kompetenzpflicht, Dokumentationsanforderungen</li>
+          <li data-i18n="curr_e1_b">DSGVO und KI: Personenbezogene Datenverarbeitung, automatisierte Entscheidungen, Transparenzpflichten</li>
+          <li data-i18n="curr_e1_c">Sektorale Fallbeispiele: Gesundheit, Finanzen, Produktion, öffentliche Verwaltung</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <span>Ebene II — KI-Sicherheit: Theorie und Labore</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <ul>
+          <li data-i18n="curr_e2_a">Agent-Sicherheit: Tool-Ketten, Privilege Escalation, Confused Deputy, Ambient Authority</li>
+          <li data-i18n="curr_e2_b">RAG-Sicherheit: Retrieval vor Autorisierung, indirekte Injection, Datenleck</li>
+          <li data-i18n="curr_e2_c">Bewertungsmethodik: PASS-Ebenen, Test-Validität vs. Ausführungs-Korrektheit</li>
+          <li data-i18n="curr_e2_d">Enforcement-Punkte: READ → COMBINE → DERIVE → DISCLOSE</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        <span>Ebene III — Praktikum</span>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="accordion-body">
+        <ul>
+          <li data-i18n="curr_e3_a">Sektorale Fallvielfalt: mindestens je ein Fall aus Gesundheit, Finanzen, Produktion</li>
+          <li data-i18n="curr_e3_b">Supervision: Regelmäßiges Feedback der Dozenten an jeden Teilnehmer</li>
+          <li data-i18n="curr_e3_c">Abschlusspräsentation vor Unternehmenspublikum</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 data-i18n="curriculum_eval">Messung und Bewertung</h3>
+    <ul>
+      <li data-i18n="curr_eval_a"><strong>Pre-/Post-Test:</strong> Kompetenzmessung zu Beginn und Ende jeder Ebene</li>
+      <li data-i18n="curr_eval_b"><strong>Rubrik:</strong> Bewertungskriterien pro LAB (technische Korrektheit, Belegqualität, Präsentation)</li>
+      <li data-i18n="curr_eval_c"><strong>Kirkpatrick-Modell:</strong> Wirkungsmessung auf Reaktions-, Lern-, Verhaltens- und Ergebnis-Ebene</li>
+    </ul>
+  </section>
+
+  <!-- ═══════════════════════════════════════ 9. ROADMAP ═══════════════════════════════════════ -->
+  <section>
+    <div class="section-title" data-i18n="sec_roadmap">09 — Roadmap</div>
+    <h2 data-i18n="roadmap_title">Prioritäre Empfehlungen</h2>
+
+    <h3 data-i18n="roadmap_short">Kurzfristig (0–3 Monate)</h3>
+    <ol>
+      <li data-i18n="road_1">Gespräch mit AZAV-akkreditiertem Bildungsträger (Name aus Vertraulichkeitsgründen nicht genannt)</li>
+      <li data-i18n="road_2">Positionierung als „dokumentierbare Weiterbildung im Sinne von AI Act Artikel 4“</li>
+      <li data-i18n="road_3">Ergänzung von mindestens zwei sektoralen Fallmodulen</li>
+      <li data-i18n="road_4">Definition separater Lernpfade für IT-Profis, KI-Nutzer und Führungskräfte</li>
+    </ol>
+
+    <h3 data-i18n="roadmap_mid">Mittelfristig (3–9 Monate)</h3>
+    <ol start="5">
+      <li data-i18n="road_5">Train-the-Trainer-Modul (5–10 Tage) für Partner-Dozenten</li>
+      <li data-i18n="road_6">Pilotprogramm mit 15–20 Teilnehmern, anonymes Feedback, Revision</li>
+      <li data-i18n="road_7">Dokumentationspaket: Teilnahmenachweis, Inhaltszusammenfassung, Bewertungsergebnis, Portfolio</li>
+      <li data-i18n="road_8">Technische Infrastruktur: LMS-Integration, isolierte LAB-Umgebung, API-Kostenplan</li>
+    </ol>
+
+    <h3 data-i18n="roadmap_long">Langfristig (9–18 Monate)</h3>
+    <ol start="9">
+      <li data-i18n="road_9">AZAV-Antrag über Partnerinstitution</li>
+      <li data-i18n="road_10">Sektorale Erweiterung: Gesundheit, Finanzen, Produktion, öffentliche Verwaltung</li>
+      <li data-i18n="road_11">Unternehmenspartnerschaften (KMU, Großunternehmen)</li>
+      <li data-i18n="road_12">Internationale Expansion: Österreich, Schweiz</li>
+    </ol>
+  </section>
+
+  <!-- ═══════════════════════════════════════ 10. CRITICAL SUCCESS FACTORS ═══════════════════════════════════════ -->
+  <section>
+    <div class="section-title" data-i18n="sec_csf">10 — Erfolgsfaktoren</div>
+    <h2 data-i18n="csf_title">Kritische Erfolgsfaktoren</h2>
+
+    <div class="card">
+      <ul>
+        <li data-i18n="csf_1"><strong>Klare Arbeitsteilung mit Partnerinstitution:</strong> PACDI = Inhalt und Methodik; Partner = Akkreditierung und Betrieb</li>
+        <li data-i18n="csf_2"><strong>Dokumentationsdisziplin:</strong> Jedes Weiterbildungsergebnis muss auditierbar und reproduzierbar sein</li>
+        <li data-i18n="csf_3"><strong>Kontinuierliche Aktualisierung:</strong> Überprüfung des Curriculums alle 6 Monate</li>
+        <li data-i18n="csf_4"><strong>Mehrsprachigkeit:</strong> Türkische Version als optionale Erweiterung für Bildungsträger mit entsprechenden Teilnehmergruppen — <em>nicht</em> als Fördervoraussetzung</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ 11. DISCLAIMER ═══════════════════════════════════════ -->
+  <section>
+    <div class="section-title" data-i18n="sec_disclaimer">11 — Hinweise</div>
+
+    <div class="box box-red">
+      <strong data-i18n="disclaimer_title">Rechtlicher Hinweis:</strong>
+      <span data-i18n="disclaimer_text">
+        Dieser Bericht dient als Gesprächsgrundlage. Details zu Kosten, Verantwortlichkeiten und rechtlichen Rahmenbedingungen werden im persönlichen Gespräch geklärt. Es wird ausdrücklich darauf hingewiesen, dass AI Act Artikel 4 keine Zertifizierungspflicht begründet und „AI Act-konforme Zertifikate“ nicht existieren. Die türkische Sprachversion ist als optionale Erweiterung positioniert und begründet keinen Anspruch auf Förderung durch deutsche Arbeitsagenturen.
+      </span>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer>
+  <p>
+    <span data-i18n="footer_copy">© 2026 PACDI — Analysebericht AI Security Weiterbildung.</span>
+    <a href="https://pacdi.io" data-i18n="footer_home">pacdi.io</a>
+  </p>
+  <p style="margin-top:6px; font-size:0.65rem;" data-i18n="footer_note">
+    Erstellt als Gesprächsgrundlage für deutsche Bildungsträger. Alle Marktdaten basieren auf öffentlich zugänglichen Quellen (Stand: Oktober 2026).
+  </p>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   THEME TOGGLE — PACDI Standard
+   ═══════════════════════════════════════════════════════════ */
+(function() {
+  var KEY = 'pacdi-theme';
+  var html = document.documentElement;
+  var btn = document.getElementById('themeToggle');
+
+  function apply(theme) {
+    html.setAttribute('data-theme', theme);
+    if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+  }
+
+  var saved = null;
+  try { saved = localStorage.getItem(KEY); } catch(e) {}
+  var preferred = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+  apply(saved || preferred);
+
+  if (btn) {
+    btn.onclick = function() {
+      var cur = html.getAttribute('data-theme');
+      var next = cur === 'dark' ? 'light' : 'dark';
+      try { localStorage.setItem(KEY, next); } catch(e) {}
+      apply(next);
+    };
+  }
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   I18N — PACDI Standard (DE / TR / EN)
+   ═══════════════════════════════════════════════════════════ */
+var TRANSLATIONS = {
+
+  de: {
+    hero_title: "AI Security Weiterbildung",
+    hero_sub: "Analysebericht für deutsche Bildungsträger — Marktposition, Curriculum-Bewertung und strategische Empfehlungen für ein modulares, mehrsprachiges Weiterbildungsprogramm.",
+    badge_azav: "AZAV-fähig",
+    badge_labs: "32 Labs + Final Integrated",
+    badge_langs: "DE / EN / TR",
+    badge_aiact: "AI Act Art. 4 konform",
+
+    sec_summary: "01 — Executive Summary",
+    summary_title: "Executive Summary",
+    stat_labs: "Laboratorien + Final Integrated Lab",
+    stat_levels: "Aufbauende Ebenen (I → II → III)",
+    stat_competitors: "Direkte Wettbewerber mit Governance/Evidence-Fokus",
+    stat_days: "Ausbildungstage (Vollzeit, inkl. Praktikum)",
+    summary_key: "Kernbefund:",
+    summary_key_text: "Der Markt für AI-Security-Weiterbildungen in Deutschland ist entweder von kurzen Workshops (14 Std.) oder von eng gefassten Zertifizierungen (CAISP, OSAI+) dominiert. Ein ganzheitliches Programm, das epistemologische Unterscheidungen wie „Policy ≠ Enforcement“ und „PASS ≠ Security“ zum Curriculum-Rückgrat macht, existiert nicht. Dieses Programm füllt diese Lücke.",
+    summary_azav: "Strategischer Hebel:",
+    summary_azav_text: "Eine Partnerschaft mit einem AZAV-akkreditierten Bildungsträger löst die beiden größten Schwächen des Projekts (fehlende Akkreditierung und fehlende Dozentenkapazität) direkt. PACDI positioniert sich als inhaltlicher und methodischer Urheber; die operative Last verbleibt beim Partner.",
+    summary_risk: "Kritisches Risiko:",
+    summary_risk_text: "Der Inhalt wurde bisher auf Basis eines einzigen Falls (PACDI) entwickelt. Ohne Erweiterung um sektorale Fallstudien (Gesundheit, Finanzen, Produktion) wird die Skalierung auf einen breiten Kundenstamm schwierig.",
+
+    sec_market: "02 — Marktanalyse",
+    market_title: "Marktposition und Wettbewerb",
+    market_de: "Deutschland: Bestehende Anbieter",
+    market_intl: "Internationaler Vergleich",
+    market_gap: "Marktlücke:",
+    market_gap_text: "Kein Anbieter kombiniert ein durchgängiges konzeptionelles Fundament (Governance/Evidence/Composition), ein mehrstufiges Curriculum mit Peer-Red-Team/Blue-Team und ein prüfbares Portfolio-Ergebnis in einem kohärenten Programm.",
+    th_provider: "Anbieter", th_product: "Produkt", th_price: "Preis", th_duration: "Dauer", th_lang: "Sprache",
+    td_alfa: "KI-Zertifikatskurse (TÜV Rheinland)",
+    td_kisec: "Level 1/2 — Python, ML, Bedrohungsabwehr",
+    td_free_bg: "Kostenlos mit Bildungsgutschein",
+
+    sec_strengths: "03 — Stärken des Curriculums",
+    strengths_title: "Stärken des Curriculums",
+    strength1: "Konzeptionelle Tiefe und Unterscheidungsdisziplin",
+    strength1_text: "Das Curriculum baut technisches Angriffswissen auf strukturellen Denkmodellen auf. Die durchgängig behandelten Unterscheidungen sind in den meisten Marktangeboten entweder nicht vorhanden oder nur oberflächlich:",
+    strength1_a: "Datenvertrauen und Instruktionsbefugnis sind getrennte Achsen.",
+    strength1_b: "Datenzugriff, Kombination, Ableitung und Offenlegung haben separate Autorisierungsgrenzen.",
+    strength1_c: "Die Existenz einer Richtlinie beweist nicht ihre Durchsetzung; ein bestandener Test beweist nicht die Sicherheitsbehauptung.",
+    strength1_d: "Mehrere „Belege“ aus derselben Quelle sind keine unabhängige Verifizierung.",
+    strength2: "Dreistufige Struktur und Portfolio-Ergebnis",
+    strength2_text: "Ebene I (KI-Grundkompetenz) → Ebene II (Theorie & Labore) → Ebene III (Praktikum mit Peer-Red-Team/Blue-Team). Das Prinzip „Nachweis statt Selbstauskunft“ produziert für Arbeitgeber einen konkreten, prüfbaren Nachweis — besonders relevant für Jobcenter und Agentur für Arbeit.",
+    strength3: "Mess- und Dokumentationsdisziplin",
+    strength3_text: "Jedes Modul folgt dem Raster: Lernziel → Theoriezeit → Laborzeit → Praktikum → erwartetes Ergebnis → Bewertung → Nachweis/Portfolio. Diese Struktur ist direkt mit den Qualitätssicherungsanforderungen von AZAV-Prüfungen kompatibel.",
+    strength4: "Mehrsprachigkeit als struktureller Vorteil",
+    strength4_text: "Das Curriculum ist von Grund auf mehrsprachig (DE/EN/TR) konzipiert. Wichtig: Die türkische Sprachversion ist als optionale Erweiterung positioniert — nicht als Voraussetzung für die Förderfähigkeit durch deutsche Arbeitsagenturen. Sie richtet sich an Bildungsträger, die Teilnehmergruppen mit türkischsprachigem Hintergrund betreuen.",
+
+    sec_gaps: "04 — Lücken & Entwicklungspotenzial",
+    gaps_title: "Entwicklungsfelder im deutschen Kontext",
+    gaps_aiact: "AI Act Artikel 4: Aktueller Stand",
+    gaps_aiact_text: "Artikel 4 ist seit dem 2. Februar 2025 in Kraft. Anbieter und Betreiber von KI-Systemen müssen Maßnahmen ergreifen, um die KI-Kompetenz ihrer Mitarbeiter zu fördern. <strong>Mit dem Digital Omnibus wurde die Vorschrift gelockert:</strong> Es wird kein bestimmtes Kompetenzniveau garantiert, und es gibt keine Zertifizierungspflicht. In der Praxis bedeutet dies: Organisationen müssen „Schulungs- und Sensibilisierungsprogramme dokumentieren“. Der Bedarf entsteht daher nicht aus „Zertifikaten“, sondern aus <strong>„nachweisbarer Kompetenz“</strong>.",
+    gaps_aiact_warn: "Wichtig für die Außendarstellung:",
+    gaps_aiact_warn_text: "Formulierungen wie „AI Act-konformes Zertifikat“ sollten vermieden werden, da keine gesetzliche Zertifizierungspflicht besteht. Stattdessen: „Dokumentierbare Weiterbildung im Sinne von AI Act Artikel 4“.",
+    gaps_segments: "Zielgruppensegmentierung",
+    th_segment: "Segment", th_need: "Bedarf", th_level: "Empfohlene Ebene", th_duration2: "Dauer",
+    seg1: "IT-Sicherheitsprofis", seg1_need: "Technische Tiefe, Red Teaming, Agent-Sicherheit",
+    seg2: "KI-Nutzer / White-Collar", seg2_need: "Sichere KI-Nutzung, Prompt-Sicherheit, Datenschutz",
+    seg3: "Führungskräfte / Entscheider", seg3_need: "KI-Risikogovernance, Policy/Enforcement, Audit", seg3_level: "Sondermodul (Management Summary)",
+    gaps_sectors: "Sektorale Fallstudien",
+    gaps_sectors_text: "Der Inhalt basiert bisher auf CRM-, HR- und Kundensupport-Szenarien. Für den deutschen Markt sind mindestens drei sektorale Module erforderlich:",
+    sector_health: "KI-Sicherheit in klinischen Entscheidungsunterstützungssystemen, Patientendatenschutz, medizinische KI-Validierung.",
+    sector_finance: "Bias in Kreditscoring-Modellen, adversarial attacks in Betrugserkennung, Audit-Trail.",
+    sector_prod: "KI-Sicherheit in industriellen IoT- und Robotiksystemen, Sicherheitsbeschränkungen, Mensch-Maschine-Interaktion.",
+    gaps_trainer: "Dozentenschulung",
+    gaps_trainer_text: "Ein „Train-the-Trainer“-Modul (5–10 Tage) ist erforderlich: Konzeptioneller Rahmen, LAB-Durchführung und -Bewertung, Peer-Red-Team/Blue-Team-Facilitation, AZAV-Dokumentationsanforderungen.",
+
+    sec_professions: "05 — Berufsbilder",
+    professions_title: "15 Berufsbilder: KI-Kompetenzanforderungen im deutschen Markt",
+    professions_note: "Basierend auf aktuellen Stellenausschreibungen in Deutschland (Deloitte, BMW, Personio, KPMG, alfatraining, IHK u.a.).",
+    th_job: "Berufsbild", th_tasks: "Typische Aufgaben", th_skills: "Gefragte KI-Kompetenzen", th_match: "Set-Zuordnung",
+    direct: "Direkt", indirect: "Indirekt", partial: "Teilweise",
+
+    job1: "Automatisierungsberater", job1_tasks: "Prozessanalyse, RPA/IDP-Lösungen, Low-Code-Plattformen", job1_skills: "Low-Code/No-Code, Conversational AI, Dokumentenverarbeitung, Python/JS",
+    job2: "Content-Operator", job2_tasks: "KI-gestützte Content-Produktion, Multi-Tool-Orchestrierung", job2_skills: "Prompt Engineering, Multi-Modell-Management, Inhaltsverifizierung",
+    job3: "Cybersicherheitsexperte", job3_tasks: "Bedrohungsanalyse für KI-Systeme, OWASP LLM Top 10, RAG-Sicherheit", job3_skills: "LLM-Sicherheit, Prompt Injection, Agent-Sicherheit, NIST AI RMF",
+    job4: "Personal-Brand-Stratege", job4_tasks: "Sichtbarkeit in KI-Suchsystemen, Content-Strategie", job4_skills: "KI-Suchoptimierung, Content-KI-Tools",
+    job5: "KI-Produktdesigner", job5_tasks: "KI-native Produkterfahrung, multimodale Interfaces", job5_skills: "LLM-Grenzen, agentisches Design, KI-gestütztes Prototyping",
+    job6: "Prompt-/Workflow-Architekt", job6_tasks: "Prompt-Architektur, agentische Workflows, RAG-Integration", job6_skills: "Prompt Engineering, Agent-Orchestrierung, RAG, EU AI Act",
+    job7: "Datenanalyst", job7_tasks: "BI-Tools (Tableau/Power BI), SQL, Python, ML-Grundlagen", job7_skills: "Python (pandas/scikit-learn), SQL, ML-Konzepte, LLM Evaluation",
+    job8: "Video-KI-Creator", job8_tasks: "KI-Videoproduktion, digitale Charaktere, automatischer Schnitt", job8_skills: "KI-Video-Tools, multimodale Produktion, Urheberrecht",
+    job9: "Community-Builder", job9_tasks: "KI-gestütztes Community-Management, personalisierte Kommunikation", job9_skills: "KI-Tools, Datenanalyse, Personalisierung",
+    job10: "KI-Trainer", job10_tasks: "Unternehmens-KI-Schulungen, Curriculum-Design, Kompetenzmessung", job10_skills: "KI-Tools (ChatGPT/Claude), Pädagogik, KPI-Tracking",
+    job11: "Remote-Sales-Closer", job11_tasks: "KI-Vertriebsagenten, Echtzeit-Coaching, Gesprächsanalyse", job11_skills: "KI-Vertriebstools, Automatisierung, Datenanalyse",
+    job12: "Gesundheitstechnologie-Spezialist", job12_tasks: "Klinische Entscheidungsunterstützung, medizinische KI-Validierung", job12_skills: "Medizinische KI-Bewertung, DSGVO/HIPAA, klinische Validierung",
+    job13: "Indie-SaaS-Gründer", job13_tasks: "KI-Coding-Tools, KI-gestütztes Marketing, Kundenfeedback-Analyse", job13_skills: "KI-Coding-Tools, KI-Marketing, Produktmanagement",
+    job14: "Digital-Asset-Creator", job14_tasks: "KI-Avatare/digitale Zwillinge, Tokenisierung, Monetarisierung", job14_skills: "KI-Avatar-Produktion, Digital-Asset-Management",
+    job15: "Mensch + KI-Operator", job15_tasks: "KI-Agenten überwachen, Edge Cases, Compliance-Audit, Eskalation", job15_skills: "KI-Agent-Management, Monitoring, Compliance, Eskalation",
+
+    sec_pricing: "06 — Preisstrategie",
+    pricing_title: "Preispositionierung",
+    price_tier1: "Einstiegssegment (Self-Paced, enger Umfang)",
+    price_tier2: "Mittel-Oberes Unternehmenssegment",
+    price_target: "Empfohlene Zielpositionierung",
+    pricing_bg: "Bildungsgutschein-Kompatibilität:",
+    pricing_bg_text: "Bei Angebot über einen AZAV-akkreditierten Partner wird das Programm für Teilnehmer mit 0 € Eigenanteil zugänglich — ein kritischer Vorteil für Arbeitsuchende und Geringverdiener.",
+
+    sec_swot: "07 — SWOT-Analyse",
+    swot_title: "SWOT-Analyse",
+    swot_s: "Stärken", swot_w: "Schwächen", swot_o: "Chancen", swot_t: "Risiken",
+    swot_s1: "32 Labs + Final Integrated Lab + Pocket Reference Kit",
+    swot_s2: "Governance/Evidence/Composition-Ebene im Markt einzigartig",
+    swot_s3: "Halbfertige Checklisten und Templates",
+    swot_s4: "Provenienz: klare Zuordnung aller Beiträge",
+    swot_w1: "Bisher nur ein Fall (PACDI) als Grundlage",
+    swot_w2: "Keine AZAV-Akkreditierung / Zertifikatsinfrastruktur",
+    swot_w3: "Mehrsprachigkeit erfordert erheblichen Übersetzungsaufwand",
+    swot_w4: "Physisches Format = Fixkosten, langsamere Skalierung",
+    swot_o1: "Deutschland: Lücke bei Governance/Evidence-orientierten Kursen",
+    swot_o2: "EU/KVKK-Regulierungsdruck erhöht Nachfrage",
+    swot_o3: "Mehrsprachiges physisches Format erreicht neue Zielgruppen",
+    swot_o4: "PACDI-Praxisfall als Glaubwürdigkeitsnachweis",
+    swot_t1: "Große Anbieter könnten Governance-Module integrieren",
+    swot_t2: "KI-Feld ändert sich schnell; gedruckte Module veralten",
+    swot_t3: "Ohne Akkreditierung fordern Unternehmenskäufer „anerkannte Zertifikate“",
+
+    sec_curriculum: "08 — Curriculum-Empfehlungen",
+    curriculum_title: "Curriculum-Empfehlungen",
+    curr_e1_a: "AI Act Artikel 4: Bedeutung der KI-Kompetenzpflicht, Dokumentationsanforderungen",
+    curr_e1_b: "DSGVO und KI: Personenbezogene Datenverarbeitung, automatisierte Entscheidungen, Transparenzpflichten",
+    curr_e1_c: "Sektorale Fallbeispiele: Gesundheit, Finanzen, Produktion, öffentliche Verwaltung",
+    curr_e2_a: "Agent-Sicherheit: Tool-Ketten, Privilege Escalation, Confused Deputy, Ambient Authority",
+    curr_e2_b: "RAG-Sicherheit: Retrieval vor Autorisierung, indirekte Injection, Datenleck",
+    curr_e2_c: "Bewertungsmethodik: PASS-Ebenen, Test-Validität vs. Ausführungs-Korrektheit",
+    curr_e2_d: "Enforcement-Punkte: READ → COMBINE → DERIVE → DISCLOSE",
+    curr_e3_a: "Sektorale Fallvielfalt: mindestens je ein Fall aus Gesundheit, Finanzen, Produktion",
+    curr_e3_b: "Supervision: Regelmäßiges Feedback der Dozenten an jeden Teilnehmer",
+    curr_e3_c: "Abschlusspräsentation vor Unternehmenspublikum",
+    curriculum_eval: "Messung und Bewertung",
+    curr_eval_a: "<strong>Pre-/Post-Test:</strong> Kompetenzmessung zu Beginn und Ende jeder Ebene",
+    curr_eval_b: "<strong>Rubrik:</strong> Bewertungskriterien pro LAB (technische Korrektheit, Belegqualität, Präsentation)",
+    curr_eval_c: "<strong>Kirkpatrick-Modell:</strong> Wirkungsmessung auf Reaktions-, Lern-, Verhaltens- und Ergebnis-Ebene",
+
+    sec_roadmap: "09 — Roadmap",
+    roadmap_title: "Prioritäre Empfehlungen",
+    roadmap_short: "Kurzfristig (0–3 Monate)",
+    roadmap_mid: "Mittelfristig (3–9 Monate)",
+    roadmap_long: "Langfristig (9–18 Monate)",
+    road_1: "Gespräch mit AZAV-akkreditiertem Bildungsträger (Name aus Vertraulichkeitsgründen nicht genannt)",
+    road_2: "Positionierung als „dokumentierbare Weiterbildung im Sinne von AI Act Artikel 4“",
+    road_3: "Ergänzung von mindestens zwei sektoralen Fallmodulen",
+    road_4: "Definition separater Lernpfade für IT-Profis, KI-Nutzer und Führungskräfte",
+    road_5: "Train-the-Trainer-Modul (5–10 Tage) für Partner-Dozenten",
+    road_6: "Pilotprogramm mit 15–20 Teilnehmern, anonymes Feedback, Revision",
+    road_7: "Dokumentationspaket: Teilnahmenachweis, Inhaltszusammenfassung, Bewertungsergebnis, Portfolio",
+    road_8: "Technische Infrastruktur: LMS-Integration, isolierte LAB-Umgebung, API-Kostenplan",
+    road_9: "AZAV-Antrag über Partnerinstitution",
+    road_10: "Sektorale Erweiterung: Gesundheit, Finanzen, Produktion, öffentliche Verwaltung",
+    road_11: "Unternehmenspartnerschaften (KMU, Großunternehmen)",
+    road_12: "Internationale Expansion: Österreich, Schweiz",
+
+    sec_csf: "10 — Erfolgsfaktoren",
+    csf_title: "Kritische Erfolgsfaktoren",
+    csf_1: "<strong>Klare Arbeitsteilung mit Partnerinstitution:</strong> PACDI = Inhalt und Methodik; Partner = Akkreditierung und Betrieb",
+    csf_2: "<strong>Dokumentationsdisziplin:</strong> Jedes Weiterbildungsergebnis muss auditierbar und reproduzierbar sein",
+    csf_3: "<strong>Kontinuierliche Aktualisierung:</strong> Überprüfung des Curriculums alle 6 Monate",
+    csf_4: "<strong>Mehrsprachigkeit:</strong> Türkische Version als optionale Erweiterung für Bildungsträger mit entsprechenden Teilnehmergruppen — <em>nicht</em> als Fördervoraussetzung",
+
+    sec_disclaimer: "11 — Hinweise",
+    disclaimer_title: "Rechtlicher Hinweis:",
+    disclaimer_text: "Dieser Bericht dient als Gesprächsgrundlage. Details zu Kosten, Verantwortlichkeiten und rechtlichen Rahmenbedingungen werden im persönlichen Gespräch geklärt. Es wird ausdrücklich darauf hingewiesen, dass AI Act Artikel 4 keine Zertifizierungspflicht begründet und „AI Act-konforme Zertifikate“ nicht existieren. Die türkische Sprachversion ist als optionale Erweiterung positioniert und begründet keinen Anspruch auf Förderung durch deutsche Arbeitsagenturen.",
+
+    footer_copy: "© 2026 PACDI — Analysebericht AI Security Weiterbildung.",
+    footer_home: "pacdi.io",
+    footer_note: "Erstellt als Gesprächsgrundlage für deutsche Bildungsträger. Alle Marktdaten basieren auf öffentlich zugänglichen Quellen (Stand: Oktober 2026)."
+  },
+
+  tr: {
+    hero_title: "AI Security Weiterbildung",
+    hero_sub: "Alman eğitim kurumları için analiz raporu — pazar konumu, müfredat değerlendirmesi ve modüler, çok dilli bir eğitim programı için stratejik öneriler.",
+    badge_azav: "AZAV uyumlu",
+    badge_labs: "32 LAB + Final Entegre",
+    badge_langs: "DE / EN / TR",
+    badge_aiact: "AI Act Madde 4 uyumlu",
+
+    sec_summary: "01 — Yönetici Özeti",
+    summary_title: "Yönetici Özeti",
+    stat_labs: "Laboratuvar + Final Entegre LAB",
+    stat_levels: "Katmanlı yapı (I → II → III)",
+    stat_competitors: "Governance/Evidence odaklı doğrudan rakip",
+    stat_days: "Eğitim günü (tam zamanlı, staj dahil)",
+    summary_key: "Temel Bulgu:",
+    summary_key_text: "Almanya’daki AI güvenliği eğitimleri ya kısa atölyeler (14 saat) ya da dar kapsamlı sertifikasyon programları (CAISP, OSAI+) düzeyinde. „Policy ≠ Enforcement“ ve „PASS ≠ Security“ gibi epistemolojik ayrımları müfredatın omurgası yapan bütünsel bir program bulunmuyor. Bu program o boşluğu dolduruyor.",
+    summary_azav: "Stratejik Kaldıraç:",
+    summary_azav_text: "AZAV akreditasyonuna sahip bir eğitim kurumuyla ortaklık, projenin en büyük iki zayıflığını (akreditasyon ve eğitmen kapasitesi eksikliği) doğrudan çözer. PACDI içerik ve metodolojinin kaynağı olarak konumlanır; operasyonel yük paydaşta kalır.",
+    summary_risk: "Kritik Risk:",
+    summary_risk_text: "İçerik henüz tek bir vaka (PACDI) üzerinden geliştirildi. Sektörel vaka çeşitliliği (sağlık, finans, üretim) eklenmeden kurumsal müşteri tabanına yayılmak zor olacak.",
+
+    sec_market: "02 — Pazar Analizi",
+    market_title: "Pazar Konumu ve Rekabet",
+    market_de: "Almanya: Mevcut Sağlayıcılar",
+    market_intl: "Uluslararası Karşılaştırma",
+    market_gap: "Pazar Boşluğu:",
+    market_gap_text: "Hiçbir sağlayıcı bütünsel bir kavramsal temel (Governance/Evidence/Composition), Peer-Red-Team/Blue-Team içeren çok katmanlı bir müfredat ve doğrulanabilir bir portfolyo çıktısını tek bir tutarlı programda birleştirmiyor.",
+    th_provider: "Sağlayıcı", th_product: "Ürün", th_price: "Fiyat", th_duration: "Süre", th_lang: "Dil",
+    td_alfa: "AI sertifika kursları (TÜV Rheinland)",
+    td_kisec: "Seviye 1/2 — Python, ML, tehdit savunması",
+    td_free_bg: "Bildungsgutschein ile ücretsiz",
+
+    sec_strengths: "03 — Müfredatın Güçlü Yönleri",
+    strengths_title: "Müfredatın Güçlü Yönleri",
+    strength1: "Kavramsal Derinlik ve Ayrıştırma Disiplini",
+    strength1_text: "Müfredat, teknik saldırı bilgisini yapısal düşünme modelleri üzerine inşa ediyor. Piyasadaki çoğu eğitimde ya hiç bulunmayan ya da yüzeysel geçilen ayrımlar:",
+    strength1_a: "Veri güveni ile talimat yetkisi ayrı eksenlerdir.",
+    strength1_b: "Veri erişimi, birleştirme, türetme ve açıklama ayrı yetkilendirme sınırlarına sahiptir.",
+    strength1_c: "Bir politikanın varlığı onun uygulandığını kanıtlamaz; geçen bir test güvenlik iddiasını kanıtlamaz.",
+    strength1_d: "Aynı kaynaktan gelen çok sayıda „kanıt“ bağımsız doğrulama sayılamaz.",
+    strength2: "Üç Katmanlı Yapı ve Portfolyo Çıktısı",
+    strength2_text: "Katman I (AI Temel Yetkinlik) → Katman II (Teori & Laboratuvar) → Katman III (Peer-Red-Team/Blue-Team ile staj). „Nachweis statt Selbstauskunft“ ilkesi, işverenler için somut ve doğrulanabilir bir kanıt üretiyor — özellikle Jobcenter ve Agentur für Arbeit için kritik.",
+    strength3: "Ölçme ve Belgelendirme Disiplini",
+    strength3_text: "Her modül şu şablonu izliyor: Öğrenme hedefi → Teori süresi → LAB süresi → Staj → beklenen sonuç → değerlendirme → kanıt/portfolyo. Bu yapı, AZAV denetimlerinde istenen kalite güvence gereksinimleriyle doğrudan uyumlu.",
+    strength4: "Çok Dillilik Yapısal Bir Avantaj",
+    strength4_text: "Müfredat baştan çok dilli (DE/EN/TR) olarak tasarlandı. Önemli: Türkçe dil sürümü isteğe bağlı bir genişletme olarak konumlandırıldı — Alman iş ajanslarının finansmanı için ön koşul değil. Türkçe konuşan katılımcı gruplarıyla çalışan eğitim kurumlarına yöneliktir.",
+
+    sec_gaps: "04 — Eksikler & Gelişim Alanları",
+    gaps_title: "Almanya Bağlamında Gelişim Alanları",
+    gaps_aiact: "AI Act Madde 4: Güncel Durum",
+    gaps_aiact_text: "Madde 4, 2 Şubat 2025’ten itibaren yürürlükte. AI sistemlerini sağlayan ve kullanan kuruluşlar, çalışanlarının AI okuryazarlığını desteklemek için önlem almakla yükümlü. <strong>Digital Omnibus ile esnetildi:</strong> Belirli bir yetkinlik düzeyi garantisi aranmıyor; sertifika zorunluluğu yok. Pratikte kuruluşlar „eğitim ve farkındalık programlarını belgelemek“ durumunda. Talep „sertifika“dan değil, <strong>„kanıtlanabilir yetkinlik“</strong>ten doğuyor.",
+    gaps_aiact_warn: "Dış Sunum İçin Önemli:",
+    gaps_aiact_warn_text: "„AI Act uyumlu sertifika“ gibi ifadelerden kaçınılmalı; zira yasal bir sertifika zorunluluğu bulunmuyor. Bunun yerine: „AI Act Madde 4 kapsamında belgelendirilebilir eğitim“.",
+    gaps_segments: "Hedef Kitle Segmentasyonu",
+    th_segment: "Segment", th_need: "İhtiyaç", th_level: "Önerilen Katman", th_duration2: "Süre",
+    seg1: "IT Güvenlik Profesyonelleri", seg1_need: "Teknik derinlik, red teaming, ajan güvenliği",
+    seg2: "AI Kullanıcıları / Beyaz Yakalı", seg2_need: "Güvenli AI kullanımı, prompt güvenliği, veri koruma",
+    seg3: "Yöneticiler / Karar Vericiler", seg3_need: "AI risk yönetişimi, policy/enforcement, denetim", seg3_level: "Özel modül (Yönetici Özeti)",
+    gaps_sectors: "Sektörel Vaka Çalışmaları",
+    gaps_sectors_text: "İçerik ağırlıklı olarak CRM, HR ve müşteri destek senaryoları üzerinden ilerliyor. Alman pazarı için en az üç sektörel modül gerekiyor:",
+    sector_health: "Klinik karar destek sistemlerinde AI güvenliği, hasta verisi koruma, tıbbi AI validasyonu.",
+    sector_finance: "Kredi skorlama modellerinde önyargı, dolandırıcılık tespitinde adversarial saldırılar, denetim izi.",
+    sector_prod: "Endüstriyel IoT ve robotik sistemlerde AI güvenliği, güvenlik kısıtlamaları, insan-makine etkileşimi.",
+    gaps_trainer: "Eğitmen Eğitimi",
+    gaps_trainer_text: "5–10 günlük bir „Train-the-Trainer“ modülü gerekli: Kavramsal çerçeve, LAB yürütme ve değerlendirme, Peer-Red-Team/Blue-Team kolaylaştırma, AZAV belgelendirme gereksinimleri.",
+
+    sec_professions: "05 — Meslek Profilleri",
+    professions_title: "15 Meslek: Almanya Pazarında AI Beceri Gereksinimleri",
+    professions_note: "Almanya’daki güncel iş ilanlarından derlenmiştir (Deloitte, BMW, Personio, KPMG, alfatraining, IHK vb.).",
+    th_job: "Meslek", th_tasks: "Tipik Görevler", th_skills: "Aranan AI Becerileri", th_match: "Set Eşleşmesi",
+    direct: "Doğrudan", indirect: "Dolaylı", partial: "Kısmen",
+
+    job1: "Otomasyon Danışmanı", job1_tasks: "Süreç analizi, RPA/IDP çözümleri, low-code platformlar", job1_skills: "Low-code/no-code, konuşma AI’si, doküman işleme, Python/JS",
+    job2: "İçerik Operatörü", job2_tasks: "AI destekli içerik üretimi, çoklu araç orkestrasyonu", job2_skills: "Prompt mühendisliği, çoklu model yönetimi, içerik doğrulama",
+    job3: "Siber Güvenlik Uzmanı", job3_tasks: "AI sistemlerine yönelik tehdit analizi, OWASP LLM Top 10, RAG güvenliği", job3_skills: "LLM güvenliği, prompt injection, ajan güvenliği, NIST AI RMF",
+    job4: "Kişisel Marka Stratejisti", job4_tasks: "AI arama sistemlerinde görünürlük, içerik stratejisi", job4_skills: "AI arama optimizasyonu, içerik AI araçları",
+    job5: "AI Ürün Tasarımcısı", job5_tasks: "AI-native ürün deneyimi, multimodal arayüzler", job5_skills: "LLM sınırlamaları, ajanik tasarım, AI-destekli prototipleme",
+    job6: "Prompt / İş Akışı Mimarı", job6_tasks: "Prompt mimarisi, ajanik iş akışları, RAG entegrasyonu", job6_skills: "Prompt engineering, ajan orkestrasyonu, RAG, EU AI Act",
+    job7: "Veri Analisti", job7_tasks: "BI araçları (Tableau/Power BI), SQL, Python, ML temelleri", job7_skills: "Python (pandas/scikit-learn), SQL, ML kavramları, LLM değerlendirmesi",
+    job8: "Video AI Yaratıcısı", job8_tasks: "AI video üretimi, dijital karakterler, otomatik kurgu", job8_skills: "AI video araçları, multimodal üretim, telif hakları",
+    job9: "Topluluk Oluşturucu", job9_tasks: "AI destekli topluluk yönetimi, kişiselleştirilmiş iletişim", job9_skills: "AI araçları, veri analitiği, kişiselleştirme",
+    job10: "AI Eğitmeni", job10_tasks: "Kurumsal AI eğitimi, müfredat tasarımı, yetkinlik ölçümü", job10_skills: "AI araçları (ChatGPT/Claude), pedagoji, KPI takibi",
+    job11: "Uzaktan Satış Kapatıcı", job11_tasks: "AI satış ajanları, gerçek zamanlı koçluk, konuşma analitiği", job11_skills: "AI satış araçları, otomasyon, veri analizi",
+    job12: "Sağlık Teknolojisi Uzmanı", job12_tasks: "Klinik karar destek, tıbbi AI validasyonu", job12_skills: "Tıbbi AI değerlendirme, DSGVO/HIPAA, klinik validasyon",
+    job13: "Indie SaaS Kurucusu", job13_tasks: "AI kodlama araçları, AI destekli pazarlama, müşteri geri bildirimi analizi", job13_skills: "AI kodlama araçları, AI pazarlama, ürün yönetimi",
+    job14: "Dijital Varlık Yaratıcısı", job14_tasks: "AI avatar/dijital ikiz üretimi, tokenizasyon, monetizasyon", job14_skills: "AI avatar üretimi, dijital varlık yönetimi",
+    job15: "İnsan + AI Operatörü", job15_tasks: "AI ajanlarını izleme, edge case yönetimi, uyumluluk denetimi, eskalasyon", job15_skills: "AI ajan yönetimi, izleme, uyumluluk, eskalasyon",
+
+    sec_pricing: "06 — Fiyatlandırma Stratejisi",
+    pricing_title: "Fiyatlandırma Konumu",
+    price_tier1: "Giriş segmenti (Self-paced, dar kapsam)",
+    price_tier2: "Orta-üst kurumsal segment",
+    price_target: "Önerilen hedef konum",
+    pricing_bg: "Bildungsgutschein Uyumu:",
+    pricing_bg_text: "AZAV akreditasyonlu bir ortak üzerinden sunulduğunda, katılımcılar için 0 € öz katkı ile erişilebilir olacak — iş arayanlar ve düşük gelirli bireyler için kritik bir avantaj.",
+
+    sec_swot: "07 — SWOT Analizi",
+    swot_title: "SWOT Analizi",
+    swot_s: "Güçlü Yönler", swot_w: "Zayıf Yönler", swot_o: "Fırsatlar", swot_t: "Tehditler",
+    swot_s1: "32 LAB + Final Entegre LAB + Cep Referans Kiti",
+    swot_s2: "Governance/Evidence/Composition katmanı piyasada eşsiz",
+    swot_s3: "Hazır kontrol listeleri ve şablonlar",
+    swot_s4: "Provenance: tüm katkıların net atfı",
+    swot_w1: "Şu ana kadar yalnızca tek vaka (PACDI) temel alındı",
+    swot_w2: "AZAV akreditasyonu / sertifika altyapısı yok",
+    swot_w3: "Çok dillilik ciddi çeviri yükü getiriyor",
+    swot_w4: "Fiziksel format = sabit maliyet, daha yavaş ölçekleme",
+    swot_o1: "Almanya: Governance/Evidence odaklı kurslarda boşluk",
+    swot_o2: "AB/KVKK düzenleme baskısı talebi artırıyor",
+    swot_o3: "Çok dilli fiziksel format yeni hedef kitlelere ulaşıyor",
+    swot_o4: "PACDI pratik vakası güvenilirlik kanıtı",
+    swot_t1: "Büyük oyuncular governance modüllerini entegre edebilir",
+    swot_t2: "AI alanı hızla değişiyor; basılı modüller eskiyebilir",
+    swot_t3: "Akreditasyon olmadan kurumsal alıcılar „tanınan sertifika“ isteyebilir",
+
+    sec_curriculum: "08 — Müfredat Önerileri",
+    curriculum_title: "Müfredat Geliştirme Önerileri",
+    curr_e1_a: "AI Act Madde 4: AI okuryazarlığı yükümlülüğünün anlamı, belgelendirme gereksinimleri",
+    curr_e1_b: "DSGVO ve AI: Kişisel veri işleme, otomatik karar alma, şeffaflık yükümlülükleri",
+    curr_e1_c: "Sektörel vaka örnekleri: Sağlık, finans, üretim, kamu",
+    curr_e2_a: "Ajan güvenliği: Tool zincirleri, privilege escalation, confused deputy, ambient authority",
+    curr_e2_b: "RAG güvenliği: Retrieval öncesi yetkilendirme, indirect injection, veri sızıntısı",
+    curr_e2_c: "Değerlendirme metodolojisi: PASS seviyeleri, test geçerliliği vs. yürütme doğruluğu",
+    curr_e2_d: "Enforcement noktaları: READ → COMBINE → DERIVE → DISCLOSE",
+    curr_e3_a: "Sektörel vaka çeşitliliği: Sağlık, finans, üretimden en az birer vaka",
+    curr_e3_b: "Süpervizyon: Eğitmenlerin her katılımcıya düzenli geri bildirimi",
+    curr_e3_c: "Kurumsal dinleyici kitlesine final sunumu",
+    curriculum_eval: "Ölçme ve Değerlendirme",
+    curr_eval_a: "<strong>Ön test / son test:</strong> Her katmanın başında ve sonunda yetkinlik ölçümü",
+    curr_eval_b: "<strong>Rubrik:</strong> Her LAB için değerlendirme kriterleri (teknik doğruluk, kanıt kalitesi, sunum)",
+    curr_eval_c: "<strong>Kirkpatrick modeli:</strong> Tepki, öğrenme, davranış, sonuç düzeyinde etki ölçümü",
+
+    sec_roadmap: "09 — Yol Haritası",
+    roadmap_title: "Öncelikli Öneriler",
+    roadmap_short: "Kısa Vadeli (0–3 Ay)",
+    roadmap_mid: "Orta Vadeli (3–9 Ay)",
+    roadmap_long: "Uzun Vadeli (9–18 Ay)",
+    road_1: "AZAV akreditasyonlu eğitim kurumuyla görüşme (isim gizlilik nedeniyle belirtilmemiştir)",
+    road_2: "„AI Act Madde 4 kapsamında belgelendirilebilir eğitim“ olarak konumlandırma",
+    road_3: "En az iki sektörel vaka modülü eklenmesi",
+    road_4: "IT profesyonelleri, AI kullanıcıları ve yöneticiler için ayrı öğrenme yolları tanımlanması",
+    road_5: "Partner eğitmenler için Train-the-Trainer modülü (5–10 gün)",
+    road_6: "15–20 kişilik pilot program, anonim geri bildirim, revizyon",
+    road_7: "Belgelendirme paketi: Katılım belgesi, içerik özeti, değerlendirme sonucu, portfolyo",
+    road_8: "Teknik altyapı: LMS entegrasyonu, izole LAB ortamı, API maliyet planı",
+    road_9: "Partner kurum üzerinden AZAV başvurusu",
+    road_10: "Sektörel genişleme: Sağlık, finans, üretim, kamu",
+    road_11: "Kurumsal ortaklıklar (KOBİ, büyük ölçekli)",
+    road_12: "Uluslararası genişleme: Avusturya, İsviçre",
+
+    sec_csf: "10 — Başarı Faktörleri",
+    csf_title: "Kritik Başarı Faktörleri",
+    csf_1: "<strong>Partner kurumla net iş bölümü:</strong> PACDI = içerik ve metodoloji; partner = akreditasyon ve operasyon",
+    csf_2: "<strong>Belgelendirme disiplini:</strong> Her eğitim çıktısı denetlenebilir ve tekrarlanabilir olmalı",
+    csf_3: "<strong>Sürekli güncelleme:</strong> Müfredatın 6 ayda bir gözden geçirilmesi",
+    csf_4: "<strong>Çok dillilik:</strong> Türkçe sürüm, ilgili katılımcı gruplarına sahip eğitim kurumları için isteğe bağlı genişletme — <em>finansman ön koşulu değil</em>",
+
+    sec_disclaimer: "11 — Notlar",
+    disclaimer_title: "Yasal Uyarı:",
+    disclaimer_text: "Bu rapor görüşme temeli olarak hazırlanmıştır. Maliyet, sorumluluk ve yasal çerçeve detayları kişisel görüşmede netleştirilecektir. AI Act Madde 4’ün sertifika zorunluluğu getirmediği ve „AI Act uyumlu sertifika“nın mevcut olmadığı açıkça belirtilir. Türkçe dil sürümü isteğe bağlı bir genişletme olarak konumlandırılmıştır ve Alman iş ajansları tarafından finansman talebi doğurmaz.",
+
+    footer_copy: "© 2026 PACDI — AI Security Weiterbildung Analiz Raporu.",
+    footer_home: "pacdi.io",
+    footer_note: "Alman eğitim kurumları için görüşme temeli olarak hazırlanmıştır. Tüm pazar verileri kamuya açık kaynaklara dayanmaktadır (Ekim 2026 itibarıyla)."
+  },
+
+  en: {
+    hero_title: "AI Security Further Education",
+    hero_sub: "Analysis report for German educational institutions — market positioning, curriculum assessment and strategic recommendations for a modular, multilingual training programme.",
+    badge_azav: "AZAV-compatible",
+    badge_labs: "32 Labs + Final Integrated",
+    badge_langs: "DE / EN / TR",
+    badge_aiact: "AI Act Art. 4 compliant",
+
+    sec_summary: "01 — Executive Summary",
+    summary_title: "Executive Summary",
+    stat_labs: "Laboratories + Final Integrated Lab",
+    stat_levels: "Progressive levels (I → II → III)",
+    stat_competitors: "Direct competitors with Governance/Evidence focus",
+    stat_days: "Training days (full-time, incl. internship)",
+    summary_key: "Key Finding:",
+    summary_key_text: "The market for AI security training in Germany is dominated either by short workshops (14 hrs) or narrowly scoped certifications (CAISP, OSAI+). A holistic programme that makes epistemological distinctions such as “Policy ≠ Enforcement” and “PASS ≠ Security” the backbone of its curriculum does not exist. This programme fills that gap.",
+    summary_azav: "Strategic Lever:",
+    summary_azav_text: "A partnership with an AZAV-accredited educational institution directly solves the project's two biggest weaknesses (lack of accreditation and lack of instructor capacity). PACDI positions itself as the content and methodology originator; operational load remains with the partner.",
+    summary_risk: "Critical Risk:",
+    summary_risk_text: "Content has so far been developed based on a single case (PACDI). Without expansion into sectoral case studies (healthcare, finance, manufacturing), scaling to a broad client base will be difficult.",
+
+    sec_market: "02 — Market Analysis",
+    market_title: "Market Position and Competition",
+    market_de: "Germany: Existing Providers",
+    market_intl: "International Comparison",
+    market_gap: "Market Gap:",
+    market_gap_text: "No provider combines a coherent conceptual foundation (Governance/Evidence/Composition), a multi-level curriculum with Peer-Red-Team/Blue-Team, and a verifiable portfolio outcome in a single coherent programme.",
+    th_provider: "Provider", th_product: "Product", th_price: "Price", th_duration: "Duration", th_lang: "Language",
+    td_alfa: "AI certification courses (TÜV Rheinland)",
+    td_kisec: "Level 1/2 — Python, ML, threat defence",
+    td_free_bg: "Free with Bildungsgutschein",
+
+    sec_strengths: "03 — Curriculum Strengths",
+    strengths_title: "Curriculum Strengths",
+    strength1: "Conceptual Depth and Disciplined Distinctions",
+    strength1_text: "The curriculum builds technical attack knowledge on structural thinking models. The consistently treated distinctions are either absent or superficial in most market offerings:",
+    strength1_a: "Data trust and instruction authority are separate axes.",
+    strength1_b: "Data access, combination, derivation and disclosure have separate authorisation boundaries.",
+    strength1_c: "The existence of a policy does not prove its enforcement; a passed test does not prove the security claim.",
+    strength1_d: "Multiple “pieces of evidence” from the same source are not independent verification.",
+    strength2: "Three-Level Structure and Portfolio Outcome",
+    strength2_text: "Level I (AI Basic Competence) → Level II (Theory & Labs) → Level III (Internship with Peer-Red-Team/Blue-Team). The principle “Evidence instead of self-declaration” produces a concrete, verifiable credential for employers — particularly relevant for Jobcenter and Agentur für Arbeit.",
+    strength3: "Measurement and Documentation Discipline",
+    strength3_text: "Each module follows the pattern: Learning objective → Theory time → Lab time → Internship → expected outcome → assessment → evidence/portfolio. This structure is directly compatible with the quality assurance requirements of AZAV audits.",
+    strength4: "Multilingualism as a Structural Advantage",
+    strength4_text: "The curriculum is designed multilingually from the ground up (DE/EN/TR). Important: The Turkish language version is positioned as an optional extension — not as a prerequisite for funding by German labour agencies. It targets educational institutions serving participant groups with Turkish-speaking backgrounds.",
+
+    sec_gaps: "04 — Gaps & Development Areas",
+    gaps_title: "Development Areas in the German Context",
+    gaps_aiact: "AI Act Article 4: Current Status",
+    gaps_aiact_text: "Article 4 has been in force since 2 February 2025. Providers and operators of AI systems must take measures to promote the AI competence of their employees. <strong>The Digital Omnibus relaxed the provision:</strong> no specific competence level is guaranteed, and there is no certification obligation. In practice, organisations must “document training and awareness programmes”. Demand therefore arises not from “certificates” but from <strong>“demonstrable competence”</strong>.",
+    gaps_aiact_warn: "Important for External Communication:",
+    gaps_aiact_warn_text: "Phrases such as “AI Act-compliant certificate” should be avoided, as no statutory certification obligation exists. Instead: “Documentable further education within the meaning of AI Act Article 4”.",
+    gaps_segments: "Target Group Segmentation",
+    th_segment: "Segment", th_need: "Need", th_level: "Recommended Level", th_duration2: "Duration",
+    seg1: "IT Security Professionals", seg1_need: "Technical depth, red teaming, agent security",
+    seg2: "AI Users / White-Collar", seg2_need: "Safe AI usage, prompt security, data protection",
+    seg3: "Managers / Decision-Makers", seg3_need: "AI risk governance, policy/enforcement, audit", seg3_level: "Special module (Management Summary)",
+    gaps_sectors: "Sectoral Case Studies",
+    gaps_sectors_text: "Content is currently based on CRM, HR and customer support scenarios. At least three sectoral modules are required for the German market:",
+    sector_health: "AI security in clinical decision support systems, patient data protection, medical AI validation.",
+    sector_finance: "Bias in credit scoring models, adversarial attacks in fraud detection, audit trail.",
+    sector_prod: "AI security in industrial IoT and robotics, safety constraints, human-machine interaction.",
+    gaps_trainer: "Instructor Training",
+    gaps_trainer_text: "A “Train-the-Trainer” module (5–10 days) is required: Conceptual framework, LAB delivery and assessment, Peer-Red-Team/Blue-Team facilitation, AZAV documentation requirements.",
+
+    sec_professions: "05 — Professional Profiles",
+    professions_title: "15 Professions: AI Competency Requirements in the German Market",
+    professions_note: "Compiled from current job postings in Germany (Deloitte, BMW, Personio, KPMG, alfatraining, IHK, etc.).",
+    th_job: "Profession", th_tasks: "Typical Tasks", th_skills: "In-Demand AI Skills", th_match: "Set Mapping",
+    direct: "Direct", indirect: "Indirect", partial: "Partial",
+
+    job1: "Automation Consultant", job1_tasks: "Process analysis, RPA/IDP solutions, low-code platforms", job1_skills: "Low-code/no-code, conversational AI, document processing, Python/JS",
+    job2: "Content Operator", job2_tasks: "AI-assisted content production, multi-tool orchestration", job2_skills: "Prompt engineering, multi-model management, content verification",
+    job3: "Cybersecurity Expert", job3_tasks: "Threat analysis for AI systems, OWASP LLM Top 10, RAG security", job3_skills: "LLM security, prompt injection, agent security, NIST AI RMF",
+    job4: "Personal Brand Strategist", job4_tasks: "Visibility in AI search systems, content strategy", job4_skills: "AI search optimisation, content AI tools",
+    job5: "AI Product Designer", job5_tasks: "AI-native product experience, multimodal interfaces", job5_skills: "LLM limitations, agentic design, AI-assisted prototyping",
+    job6: "Prompt / Workflow Architect", job6_tasks: "Prompt architecture, agentic workflows, RAG integration", job6_skills: "Prompt engineering, agent orchestration, RAG, EU AI Act",
+    job7: "Data Analyst", job7_tasks: "BI tools (Tableau/Power BI), SQL, Python, ML fundamentals", job7_skills: "Python (pandas/scikit-learn), SQL, ML concepts, LLM evaluation",
+    job8: "Video AI Creator", job8_tasks: "AI video production, digital characters, automated editing", job8_skills: "AI video tools, multimodal production, copyright",
+    job9: "Community Builder", job9_tasks: "AI-assisted community management, personalised communication", job9_skills: "AI tools, data analytics, personalisation",
+    job10: "AI Trainer", job10_tasks: "Corporate AI training, curriculum design, competency measurement", job10_skills: "AI tools (ChatGPT/Claude), pedagogy, KPI tracking",
+    job11: "Remote Sales Closer", job11_tasks: "AI sales agents, real-time coaching, conversation analytics", job11_skills: "AI sales tools, automation, data analysis",
+    job12: "Health Technology Specialist", job12_tasks: "Clinical decision support, medical AI validation", job12_skills: "Medical AI assessment, GDPR/HIPAA, clinical validation",
+    job13: "Indie SaaS Founder", job13_tasks: "AI coding tools, AI-assisted marketing, customer feedback analysis", job13_skills: "AI coding tools, AI marketing, product management",
+    job14: "Digital Asset Creator", job14_tasks: "AI avatars/digital twins, tokenisation, monetisation", job14_skills: "AI avatar production, digital asset management",
+    job15: "Human + AI Operator", job15_tasks: "Monitoring AI agents, edge cases, compliance audit, escalation", job15_skills: "AI agent management, monitoring, compliance, escalation",
+
+    sec_pricing: "06 — Pricing Strategy",
+    pricing_title: "Pricing Position",
+    price_tier1: "Entry segment (self-paced, narrow scope)",
+    price_tier2: "Mid-to-upper corporate segment",
+    price_target: "Recommended target positioning",
+    pricing_bg: "Bildungsgutschein Compatibility:",
+    pricing_bg_text: "When offered through an AZAV-accredited partner, the programme becomes accessible to participants at 0 € personal contribution — a critical advantage for job seekers and low-income individuals.",
+
+    sec_swot: "07 — SWOT Analysis",
+    swot_title: "SWOT Analysis",
+    swot_s: "Strengths", swot_w: "Weaknesses", swot_o: "Opportunities", swot_t: "Threats",
+    swot_s1: "32 Labs + Final Integrated Lab + Pocket Reference Kit",
+    swot_s2: "Governance/Evidence/Composition layer unique in the market",
+    swot_s3: "Ready-made checklists and templates",
+    swot_s4: "Provenance: clear attribution of all contributions",
+    swot_w1: "So far based on a single case (PACDI)",
+    swot_w2: "No AZAV accreditation / certification infrastructure",
+    swot_w3: "Multilingualism requires significant translation effort",
+    swot_w4: "Physical format = fixed costs, slower scaling",
+    swot_o1: "Germany: gap in Governance/Evidence-oriented courses",
+    swot_o2: "EU/GDPR regulatory pressure increases demand",
+    swot_o3: "Multilingual physical format reaches new target groups",
+    swot_o4: "PACDI practical case as credibility proof",
+    swot_t1: "Major players could integrate governance modules",
+    swot_t2: "AI field changes rapidly; printed modules may become outdated",
+    swot_t3: "Without accreditation, corporate buyers may demand “recognised certificates”",
+
+    sec_curriculum: "08 — Curriculum Recommendations",
+    curriculum_title: "Curriculum Development Recommendations",
+    curr_e1_a: "AI Act Article 4: Meaning of the AI competence obligation, documentation requirements",
+    curr_e1_b: "GDPR and AI: Personal data processing, automated decision-making, transparency obligations",
+    curr_e1_c: "Sectoral case examples: Healthcare, finance, manufacturing, public administration",
+    curr_e2_a: "Agent security: Tool chains, privilege escalation, confused deputy, ambient authority",
+    curr_e2_b: "RAG security: Retrieval before authorisation, indirect injection, data leakage",
+    curr_e2_c: "Evaluation methodology: PASS levels, test validity vs. execution correctness",
+    curr_e2_d: "Enforcement points: READ → COMBINE → DERIVE → DISCLOSE",
+    curr_e3_a: "Sectoral case diversity: at least one case each from healthcare, finance, manufacturing",
+    curr_e3_b: "Supervision: Regular instructor feedback to each participant",
+    curr_e3_c: "Final presentation to a corporate audience",
+    curriculum_eval: "Measurement and Assessment",
+    curr_eval_a: "<strong>Pre-/post-test:</strong> Competency measurement at the beginning and end of each level",
+    curr_eval_b: "<strong>Rubric:</strong> Assessment criteria per LAB (technical correctness, evidence quality, presentation)",
+    curr_eval_c: "<strong>Kirkpatrick model:</strong> Impact measurement at reaction, learning, behaviour and results levels",
+
+    sec_roadmap: "09 — Roadmap",
+    roadmap_title: "Priority Recommendations",
+    roadmap_short: "Short-Term (0–3 Months)",
+    roadmap_mid: "Medium-Term (3–9 Months)",
+    roadmap_long: "Long-Term (9–18 Months)",
+    road_1: "Meeting with AZAV-accredited educational institution (name withheld for confidentiality)",
+    road_2: "Positioning as “documentable further education within the meaning of AI Act Article 4”",
+    road_3: "Addition of at least two sectoral case modules",
+    road_4: "Definition of separate learning paths for IT professionals, AI users and managers",
+    road_5: "Train-the-Trainer module (5–10 days) for partner instructors",
+    road_6: "Pilot programme with 15–20 participants, anonymous feedback, revision",
+    road_7: "Documentation package: attendance record, content summary, assessment result, portfolio",
+    road_8: "Technical infrastructure: LMS integration, isolated LAB environment, API cost plan",
+    road_9: "AZAV application via partner institution",
+    road_10: "Sectoral expansion: Healthcare, finance, manufacturing, public administration",
+    road_11: "Corporate partnerships (SMEs, large enterprises)",
+    road_12: "International expansion: Austria, Switzerland",
+
+    sec_csf: "10 — Success Factors",
+    csf_title: "Critical Success Factors",
+    csf_1: "<strong>Clear division of labour with partner institution:</strong> PACDI = content and methodology; partner = accreditation and operations",
+    csf_2: "<strong>Documentation discipline:</strong> Every training outcome must be auditable and reproducible",
+    csf_3: "<strong>Continuous updating:</strong> Curriculum review every 6 months",
+    csf_4: "<strong>Multilingualism:</strong> Turkish version as an optional extension for institutions with relevant participant groups — <em>not</em> a funding prerequisite",
+
+    sec_disclaimer: "11 — Notes",
+    disclaimer_title: "Legal Notice:",
+    disclaimer_text: "This report serves as a discussion basis. Details on costs, responsibilities and legal framework will be clarified in a personal meeting. It is explicitly noted that AI Act Article 4 does not establish a certification obligation and that “AI Act-compliant certificates” do not exist. The Turkish language version is positioned as an optional extension and does not give rise to any claim for funding by German labour agencies.",
+
+    footer_copy: "© 2026 PACDI — AI Security Further Education Analysis Report.",
+    footer_home: "pacdi.io",
+    footer_note: "Prepared as a discussion basis for German educational institutions. All market data based on publicly available sources (as of October 2026)."
+  }
+};
+
+/* ── Language Functions ── */
+function setLanguage(lang) {
+  try { localStorage.setItem('pacdi-lang', lang); } catch(e) {}
+  document.documentElement.lang = lang;
+  var t = TRANSLATIONS[lang] || TRANSLATIONS.de;
+  document.querySelectorAll('[data-i18n]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = t[key];
+      } else {
+        /* innerHTML: Übersetzungen enthalten teilweise <strong>/<em> */
+        el.innerHTML = t[key];
+      }
+    }
+  });
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.textContent.trim().toLowerCase() === lang);
+  });
+}
+
+/* ── Accordion ── */
+function toggleAccordion(header) {
+  var acc = header.parentElement;
+  acc.classList.toggle('open');
+}
+
+/* ── Init ── */
+(function() {
+  var saved = null;
+  try { saved = localStorage.getItem('pacdi-lang'); } catch(e) {}
+  var browser = (navigator.language || 'de').substring(0,2).toLowerCase();
+  var initLang = saved || (TRANSLATIONS[browser] ? browser : 'de');
+  setLanguage(initLang);
+})();
+</script>
+
+</body>
+</html>
